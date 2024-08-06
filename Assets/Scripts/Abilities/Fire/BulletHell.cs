@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BulletHell : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject target;
+
+    
     void Start()
     {
-        
+        target = TargetManager.GetLastTarget();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
