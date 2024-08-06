@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f967fbfb21516e45ad5de4ec6c682f4, type: 3}
+  m_Name: InventoryObjects
+  m_EditorClassIdentifier: 
+  attacks:
+  - {fileID: 2366034201987322834, guid: c0f00231125ed7143b4a124e78506127, type: 3}
+  - {fileID: 5503765092448292656, guid: 7f55ea252ec3edf47b665714c34f9ee0, type: 3}
+  potions:
+  - {fileID: 1623954172115271655, guid: 2a2cef5c6ef6c904c81b5224482e9f84, type: 3}
+  - {fileID: 2646669898998476700, guid: 37e6031770290cb4cbc3d81da3a9ea80, type: 3}
+  weapons:
+  - {fileID: 866853477427648782, guid: 1597b56dfc58b4b48a5d00efc4250977, type: 3}
