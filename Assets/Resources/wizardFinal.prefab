@@ -1020,7 +1020,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSelected: 
-  attackPrefabs: []
+  attackSpawn: {fileID: 179668147350309777}
+  attackPrefabs:
+  - {fileID: 6691069037369428849, guid: ba9e7862688c88d46868b5cdb391fe29, type: 3}
+  - {fileID: 2465549185311134290, guid: b5c15e31db0e5774da30681d6d96832c, type: 3}
+  - {fileID: 7077189697524358070, guid: c7afc86f062831d479c8a2716d12ea79, type: 3}
 --- !u!114 &166221059134556573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1324,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddafb8831133c494aa9f0d84cc3e83a1, type: 3}
+--- !u!1 &179668147350309777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 853146333274227548, guid: ddafb8831133c494aa9f0d84cc3e83a1, type: 3}
+  m_PrefabInstance: {fileID: 696003142050400461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3420747049950807457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2796837051523190124, guid: ddafb8831133c494aa9f0d84cc3e83a1, type: 3}

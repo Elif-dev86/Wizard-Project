@@ -11,11 +11,6 @@ public class AttackEvent : MonoBehaviour
 
     public GameObject[] attackPrefabs;
 
-    private void Start()
-    {
-        
-    }
-
     public void AttackCall()
     {
         for (int i = 0; i < attackPrefabs.Length; i++)
@@ -46,6 +41,26 @@ public class AttackEvent : MonoBehaviour
                         Instantiate(attackPrefabs[2]);
 
                         break;
+
+                    case "bullethell":
+
+                        int[] rotationAngles = {-45, -25, 0, 25, 45 };
+
+                        for (int j = 0; j < 5; j++)
+                        {
+
+                            GameObject bulletHellObj = Instantiate(attackPrefabs[3]);
+
+                            AttackSpawn(bulletHellObj);
+
+                            Quaternion attackRotation = Quaternion.Euler(0, rotationAngles[j], 0);
+
+                            bulletHellObj.transform.rotation = attackRotation;
+                        }
+
+                        break;
+
+
                 }
 
 

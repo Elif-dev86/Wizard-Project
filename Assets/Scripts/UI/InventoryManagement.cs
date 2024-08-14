@@ -12,8 +12,6 @@ public class InventoryManagement : MonoBehaviour
 
     public GameObject[] inventorySlots;
 
-    public GameObject[] hotbarSlots;
-
     public bool canSelectTarget = false;
 
     public string objectSelected;
@@ -96,7 +94,7 @@ public class InventoryManagement : MonoBehaviour
 
     private void InventoryCheck(string objectSelected, RaycastHit hit)
     {
-        HotbarCheck(objectSelected, hit);
+        //HotbarCheck(objectSelected, hit);
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -138,46 +136,6 @@ public class InventoryManagement : MonoBehaviour
         }
 
         
-    }
-
-    private void HotbarCheck(string objectSelected, RaycastHit hit)
-    {
-        for (int i = 0; i < hotbarSlots.Length; i++)
-        {
-            Transform slot = hotbarSlots[i].transform;
-
-            if (slot.childCount > 0 && slot.root.GetChild(0).CompareTag("HotbarSlot"))
-            {
-                GameObject child = slot.GetChild(0).gameObject;
-
-                if (objectSelected == "potion" && child.CompareTag("potion"))
-                {
-
-                    PotionManager potionManagerHolder = child.GetComponent<PotionManager>();
-
-
-                    string potionName = hit.collider.GetComponent<PotionHolder>().potion.potionName;
-
-                    if (potionName == potionManagerHolder.potionName)
-                    {
-                        //Debug.Log("can stack");
-
-                        canStack = true;
-
-                        UpdateStack(child, potionManagerHolder, hit);
-
-                        break;
-
-                    }
-                    else
-                    {
-                        canStack = false;
-                    }
-
-
-                }
-            }
-        }
     }
 
     private void UpdateStack(GameObject child, PotionManager potionHolder, RaycastHit hit)
@@ -246,7 +204,10 @@ public class InventoryManagement : MonoBehaviour
         {
             if (attack_ID == inventoryObjects.attacks[i].name)
             {
+
                 Button newItem = Instantiate(inventoryObjects.attacks[i], slotTransform);
+
+                newItem.name = attack_ID;
 
                 newItem.transform.localPosition = Vector3.zero;
 

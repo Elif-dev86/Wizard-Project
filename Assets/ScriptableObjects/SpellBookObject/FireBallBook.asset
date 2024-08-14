@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c143986e2d35754e9879c1f2a54025b, type: 3}
   m_Name: FireBallBook
   m_EditorClassIdentifier: 
-  bookID: fireball_attack
+  bookID: fireball
   bookName: Fireball
   spellType: Fire

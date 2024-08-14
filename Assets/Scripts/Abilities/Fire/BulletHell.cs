@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class BulletHell : MonoBehaviour
 {
-    public GameObject target;
+    private float speed = 15;
 
-    
+    public GameObject attackSpawn;
+
+    private Vector3 direction;
+
     void Start()
     {
-        target = TargetManager.GetLastTarget();
+        attackSpawn = GameObject.FindGameObjectWithTag("attackSpawn");
+
+        if (attackSpawn != null)
+        {
+            // Calculate direction to look at the target
+            direction = transform.rotation * attackSpawn.transform.forward;
+
+            direction.y = 0;
+
+            Destroy(this.gameObject, 3);
+        }
     }
 
     
     void Update()
     {
-        
+        this.transform.position += direction * speed * Time.deltaTime;
     }
 }
