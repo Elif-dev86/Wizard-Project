@@ -190,7 +190,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
         anim.SetTrigger("attackTrigger");
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         canMove = true;
     }

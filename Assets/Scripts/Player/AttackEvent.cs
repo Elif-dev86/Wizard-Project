@@ -60,6 +60,29 @@ public class AttackEvent : MonoBehaviour
 
                         break;
 
+                    case "gaimagma":
+
+                        Instantiate(attackPrefabs[4]);
+
+                        break;
+
+                    case "burnedknuckles":
+
+                        Instantiate(attackPrefabs[5]);
+
+                        break;
+
+                    case "teleport":
+
+                        Instantiate(attackPrefabs[6]);
+
+                        break;
+
+                    case "spark":
+
+                        Instantiate(attackPrefabs[7]);
+
+                        break;
 
                 }
 
