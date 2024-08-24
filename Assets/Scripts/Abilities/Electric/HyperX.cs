@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletHell : MonoBehaviour
+public class HyperX : MonoBehaviour
 {
-    private float speed = 15;
-
     public GameObject attackSpawn;
 
     private Vector3 direction;
@@ -19,15 +17,12 @@ public class BulletHell : MonoBehaviour
             // Calculate direction to look at the target
             direction = transform.rotation * attackSpawn.transform.forward;
 
+            this.transform.rotation = Quaternion.LookRotation(-direction);
+
             direction.y = 0;
 
-            Destroy(this.gameObject, 6.1f);
+            Destroy(this.gameObject, 7f);
         }
-    }
 
-    
-    void Update()
-    {
-        this.transform.position += direction * speed * Time.deltaTime;
     }
 }

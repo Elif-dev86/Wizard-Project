@@ -84,6 +84,41 @@ public class AttackEvent : MonoBehaviour
 
                         break;
 
+                    case "thunderclap":
+
+                        Instantiate(attackPrefabs[8]);
+
+                        break;
+
+                    case "hyperx":
+
+                        GameObject hyperXObj = Instantiate(attackPrefabs[9]);
+
+                        AttackSpawn(hyperXObj);
+
+                        break;
+
+                    case "rottenspit":
+
+                        GameObject spitObj = Instantiate(attackPrefabs[10]);
+
+                        AttackSpawn(spitObj);
+
+                        break;
+
+                    case "cumulostinkus":
+
+                        GameObject stinkObj = Instantiate(attackPrefabs[11]);
+
+                        AttackSpawn(stinkObj);
+
+                        break;
+
+                    case "stingray":
+
+                        Instantiate(attackPrefabs[12]);
+
+                        break;
                 }
 
 
