@@ -119,6 +119,38 @@ public class AttackEvent : MonoBehaviour
                         Instantiate(attackPrefabs[12]);
 
                         break;
+
+                    case "heartthorns":
+
+                        Instantiate(attackPrefabs[13]);
+
+                        break;
+
+                    case "roseblood":
+
+                        Instantiate(attackPrefabs[14]);
+
+                        break;
+
+                    case "impalement":
+
+                        Instantiate(attackPrefabs[15]);
+
+                        break;
+
+                    case "thousandniddles":
+
+                        Instantiate(attackPrefabs[16]);
+
+                        break;
+
+                    case "meteorstrike":
+
+                        Instantiate(attackPrefabs[17]);
+
+                        break;
+
+
                 }
 
 
