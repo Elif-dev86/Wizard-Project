@@ -150,6 +150,20 @@ public class AttackEvent : MonoBehaviour
 
                         break;
 
+                    case "quaternions":
+
+                        Instantiate(attackPrefabs[18]);
+
+                        break;
+
+                    case "twister":
+
+                        GameObject twisterObj = Instantiate(attackPrefabs[19]);
+
+                        AttackSpawn(twisterObj);
+
+                        break;
+
 
                 }
 
