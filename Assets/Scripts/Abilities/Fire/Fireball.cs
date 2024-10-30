@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    private float speed = 40;
+    public float speed = 40;
 
     public float attackInstanceTime = 0;
 
@@ -39,6 +39,8 @@ public class Fireball : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
 
         contact.SetActive(false);
+
+        Destroy(this.gameObject, 2);
         
     }
 
@@ -47,13 +49,13 @@ public class Fireball : MonoBehaviour
         this.transform.position += direction * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision != null)
         {
-            var main = particle.main;
-
             direction = new Vector3(0, 0, 0);
+
+            var main = particle.main;
 
             glow.enabled = false;
 

@@ -15,6 +15,8 @@ public class HotbarManagement : MonoBehaviour
 
     public GameObject attackTarget;
 
+    public GameObject testRecticle;
+
     public int itemStack = 0;
 
     public string attackSelected;
@@ -39,16 +41,30 @@ public class HotbarManagement : MonoBehaviour
         choices = new Button[hotBarSlots.Length];
     }
 
-    private void FixedUpdate()
-    {
-        FindButtons();
-    }
 
     void Start()
     {
         pMovement = FindObjectOfType<PlayerMovement>();
 
         inventoryManagement = FindObjectOfType<InventoryManagement>();
+    }
+
+    private void FixedUpdate()
+    {
+        FindButtons();
+
+        if (canSelectTarget != false)
+        {
+            testRecticle.SetActive(true);
+
+            AttackPointer();
+            
+        }
+        else
+        {
+            testRecticle.SetActive(false);
+        }
+        
     }
 
     private void FindButtons()
@@ -97,6 +113,17 @@ public class HotbarManagement : MonoBehaviour
         
         
     }*/
+
+    private void AttackPointer()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+            Debug.DrawLine(ray.origin, hit.point, Color.green);
+
+            testRecticle.transform.position = hit.point;
+    }
 
     private void OnClickPerformed(InputAction.CallbackContext context)
     {

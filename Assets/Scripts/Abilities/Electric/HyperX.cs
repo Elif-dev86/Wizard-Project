@@ -17,7 +17,7 @@ public class HyperX : MonoBehaviour
             // Calculate direction to look at the target
             direction = transform.rotation * attackSpawn.transform.forward;
 
-            //this.transform.rotation = Quaternion.LookRotation(-direction);
+            this.transform.rotation = Quaternion.LookRotation(-direction);
 
             direction.y = 0;
 
