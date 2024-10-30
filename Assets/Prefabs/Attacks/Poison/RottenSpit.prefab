@@ -4903,6 +4903,7 @@ GameObject:
   - component: {fileID: 6241607583337101387}
   - component: {fileID: 2853168288038132092}
   - component: {fileID: 4219598434284152088}
+  - component: {fileID: -2475351803247727785}
   m_Layer: 0
   m_Name: RottenSpit
   m_TagString: Untagged
@@ -9845,6 +9846,27 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!65 &-2475351803247727785
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942962181828966271}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2131944639830694956
 GameObject:
   m_ObjectHideFlags: 0

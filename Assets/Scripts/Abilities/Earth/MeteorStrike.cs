@@ -12,7 +12,11 @@ public class MeteorStrike : MonoBehaviour
 
     public GameObject contact;
 
+    public GameObject hitBox;
+
     public GameObject debri;
+
+    public Animator anim;
 
     public ParticleSystem particle;
 
@@ -51,6 +55,8 @@ public class MeteorStrike : MonoBehaviour
         contact.SetActive(false);
 
         debri.SetActive(false);
+
+        anim = GetComponent<Animator>();
         
     }
 
@@ -61,7 +67,7 @@ public class MeteorStrike : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null)
+        if (collision.gameObject.CompareTag("Ground"))
         {
             direction = new Vector3(0, 0, 0);
             
@@ -74,6 +80,8 @@ public class MeteorStrike : MonoBehaviour
             meshRenderer.enabled = false;
 
             main.startLifetime = 0f;
+
+            anim.SetTrigger("isHit");
 
             Destroy(this.gameObject, attackInstanceTime);
 

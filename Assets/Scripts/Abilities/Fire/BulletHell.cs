@@ -21,7 +21,7 @@ public class BulletHell : MonoBehaviour
 
             direction.y = 0;
 
-            Destroy(this.gameObject, 6.1f);
+            Destroy(this.gameObject, 3f);
         }
     }
 

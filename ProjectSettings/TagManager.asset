@@ -19,6 +19,7 @@ TagManager:
   - Bullet
   - playerHealth
   - attackSpawn
+  - playerTarget
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - UI
   - Collectable
   - Camera
-  - 
+  - Particle
   - 
   - 
   - 

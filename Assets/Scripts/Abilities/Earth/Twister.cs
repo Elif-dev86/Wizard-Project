@@ -41,7 +41,7 @@ public class Twister : MonoBehaviour
 
         direction.y = 0;
 
-        Destroy(this.gameObject, 20f);
+        Destroy(this.gameObject, 14f);
         
     }
 

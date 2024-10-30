@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8128843106822015496}
   - component: {fileID: 731656008763825948}
   - component: {fileID: 9222264516522628938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gust3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4962,7 +4962,9 @@ GameObject:
   - component: {fileID: 7623765711266090374}
   - component: {fileID: 1850847728074042008}
   - component: {fileID: 8656450605467238350}
-  m_Layer: 0
+  - component: {fileID: 8053896984576435717}
+  - component: {fileID: 2273414564710430493}
+  m_Layer: 8
   m_Name: Twister
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9840,6 +9842,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!65 &8053896984576435717
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747457432478123320}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 264
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 8.441124, z: 15}
+  m_Center: {x: 0, y: 3.7205617, z: 0}
+--- !u!95 &2273414564710430493
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747457432478123320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27bffa862898341478c293aa0ca15f95, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7624343335564098315
 GameObject:
   m_ObjectHideFlags: 0
@@ -9853,7 +9897,7 @@ GameObject:
   - component: {fileID: 6365750209994409356}
   - component: {fileID: 2910291732129940620}
   - component: {fileID: 6047865157164614405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gust2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -33,15 +33,27 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected EnemyState currentState;
 
+    protected virtual void Awake()
+    {
+        enemyHealthCanvas.maxValue = 1;
+        enemyHealthCanvas.value = 1;
+    }
+
     protected virtual void Start()
     {
+
+        enemyHealthCanvas.maxValue = enemyMaxHealth;
+        enemyHealthCanvas.value = enemyMaxHealth;
+
         navAgent = GetComponent<NavMeshAgent>();
+        if (!navAgent)
+        {
+            navAgent = GetComponentInChildren<NavMeshAgent>();
+        }
+
         anim = GetComponentInChildren<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
-        enemyHealthCanvas.value = enemyMaxHealth;
-        enemyHealthCanvas.maxValue = enemyMaxHealth;
-
+        
         Introduction();
         ChangeState(EnemyState.Idle);
     }
@@ -138,13 +150,21 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         //RotateToTarget(target);
     }
 
-    protected virtual void OnCollisionEnter(Collision collision)
+    protected virtual void OnTriggerEnter(Collider other) 
     {
-        SpellHolder spellHolder = collision.gameObject.GetComponent<SpellHolder>();
+        Debug.Log($"Triggered with: {other.name}");
+        SpellHolder spellHolder = other.gameObject.GetComponent<SpellHolder>();
+        Debug.Log($"SpellHolder component: {spellHolder}");
+
         if (spellHolder != null)
         {
             TakeDamage(spellHolder.spell);
         }
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     public void TakeDamage(Spell spell)

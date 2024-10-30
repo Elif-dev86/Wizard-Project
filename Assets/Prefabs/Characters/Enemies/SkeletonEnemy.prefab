@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 8785388042961500830}
   - component: {fileID: 386288268836155937}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: SkeletonSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1926,7 +1926,7 @@ GameObject:
   - component: {fileID: 5171929483378983182}
   - component: {fileID: 3176127835829732726}
   m_Layer: 0
-  m_Name: EnemyHealbarCanvas
+  m_Name: SkeletonHealbarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

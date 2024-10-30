@@ -66,7 +66,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         dialogueManager = FindObjectOfType<DialogueManager>();
-        healtBar = (Slider)FindObjectOfType(typeof(Slider));
 
         inventory = GameObject.FindGameObjectWithTag("InventorySlot");
 

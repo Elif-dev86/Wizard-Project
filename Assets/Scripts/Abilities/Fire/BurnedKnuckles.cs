@@ -6,6 +6,8 @@ public class BurnedKnuckles : MonoBehaviour
 {
     public GameObject target;
 
+    private Animator anim;
+
     void Start()
     {
 
@@ -16,6 +18,10 @@ public class BurnedKnuckles : MonoBehaviour
         targetPosition.y = 9.96f;
 
         this.transform.position = targetPosition;
+
+        anim = GetComponent<Animator>();
+
+        anim.SetTrigger("isHit");
 
         Destroy(this.gameObject, 4);
     }
