@@ -64,6 +64,7 @@ public class InventoryManagement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+
                 if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Collectable"))
                 {
                     objectSelected = hit.collider.tag;
@@ -92,7 +93,7 @@ public class InventoryManagement : MonoBehaviour
         InventoryCheck(objectSelected, hit);
     }
 
-    private void InventoryCheck(string objectSelected, RaycastHit hit)
+    public void InventoryCheck(string objectSelected, RaycastHit hit)
     {
         //HotbarCheck(objectSelected, hit);
 
@@ -111,7 +112,6 @@ public class InventoryManagement : MonoBehaviour
 
                     string potionName = hit.collider.GetComponent<PotionHolder>().potion.potionName;
 
-
                     //Debug.Log("Check Runned" + potionName);
 
                     if (potionName == potionManagerHolder.potionName)
@@ -129,7 +129,15 @@ public class InventoryManagement : MonoBehaviour
                         canStack = false;
                     }
 
+                }
 
+                if (objectSelected == "door" && child.CompareTag("key"))
+                {
+                    Door doorManager = GameObject.FindObjectOfType<Door>();
+
+                    doorManager.isOpen = true;
+
+                    Destroy(child);
                 }
             }
             
@@ -162,6 +170,8 @@ public class InventoryManagement : MonoBehaviour
 
         WeaponHolder weaponHolder = hit.collider.GetComponent<WeaponHolder>();
 
+        KeyHolder keyHolder = hit.collider.GetComponent<KeyHolder>();
+
         for (int i = 0; i < avalibeSlots.Length; i++)
         {
             if (avalibeSlots[i] != 1)
@@ -188,6 +198,12 @@ public class InventoryManagement : MonoBehaviour
                     case "weapon":
 
                         AddWeaponToInventory(inventorySlots[i].transform, weaponHolder.weapon.weaponID);
+                        Destroy(hit.collider.gameObject);
+                        break;
+
+                    case "key":
+
+                        AddKeyToInventory(inventorySlots[i].transform, keyHolder.key.keyID);
                         Destroy(hit.collider.gameObject);
                         break;
                 }
@@ -248,6 +264,19 @@ public class InventoryManagement : MonoBehaviour
                 newItem.transform.localPosition = Vector3.zero;
 
                 //Debug.Log("Added item: " + newItem.name + " to slot: " + slotTransform.name);
+            }
+        }
+    }
+
+    private void AddKeyToInventory(Transform slotTransform, string key_ID)
+    {
+        for (int i  = 0; i < inventoryObjects.keys.Length; i++)
+        {
+            if (key_ID == inventoryObjects.keys[i].name)
+            {
+                Button newItem = Instantiate(inventoryObjects.keys[i], slotTransform);
+
+                newItem.transform.localPosition = Vector3.zero;
             }
         }
     }

@@ -41,12 +41,12 @@ public class HotbarManagement : MonoBehaviour
         choices = new Button[hotBarSlots.Length];
     }
 
-
     void Start()
     {
         pMovement = FindObjectOfType<PlayerMovement>();
 
         inventoryManagement = FindObjectOfType<InventoryManagement>();
+        
     }
 
     private void FixedUpdate()
@@ -82,37 +82,7 @@ public class HotbarManagement : MonoBehaviour
             }
         }
 
-        /*foreach (Button btn in choices)
-        {
-            if (btn != null)
-            {
-                Button choice = btn;
-                btn.onClick.AddListener(() => AttackSelect(choice));
-            }
-            
-        }*/
-
     }
-
-    /*public void AttackSelect(Button choice)
-    {
-        attackSelected = choice.gameObject.tag;
-
-        Debug.Log(attackSelected);
-
-        if (attackSelected == "potion" || attackSelected == "weapon")
-        {
-            return;
-        }
-        else
-        {
-            canSelectTarget = true;
-            inventoryManagement.canSelectTarget = true;
-            return;
-        }
-        
-        
-    }*/
 
     private void AttackPointer()
     {

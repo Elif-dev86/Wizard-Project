@@ -20,6 +20,9 @@ TagManager:
   - playerHealth
   - attackSpawn
   - playerTarget
+  - enemy
+  - key
+  - door
   layers:
   - Default
   - TransparentFX

@@ -11,4 +11,6 @@ public class InventoryObjects : ScriptableObject
     public Button[] potions;
 
     public Button[] weapons;
+
+    public Button[] keys;
 }

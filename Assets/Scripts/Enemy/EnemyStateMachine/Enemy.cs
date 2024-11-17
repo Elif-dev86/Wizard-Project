@@ -172,9 +172,9 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         enemyHealthCanvas.value -= spell.spellDamage;
         Debug.Log("Enemy damaged by " + spell.spellName + " for " + spell.spellDamage + " damage.");
 
-        if (enemyMaxHealth <= 0)
+        if (enemyHealthCanvas.value <= 0)
         {
-            Debug.Log("Enemy died.");
+            Destroy(this.gameObject);
         }
     }
 

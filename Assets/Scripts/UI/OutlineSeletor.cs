@@ -9,6 +9,8 @@ public class OutlineSelector : MonoBehaviour
     private Transform highlight;
     private RaycastHit raycastHit;
 
+    public bool canSelectEnemy;
+
     private string thisTag = "book";
 
     public string[] highlightType = { "book", "potion", "weapon" };
@@ -37,8 +39,8 @@ public class OutlineSelector : MonoBehaviour
                     Outline outline = highlight.gameObject.AddComponent<Outline>();
                     outline.enabled = true;
                     highlight.gameObject.GetComponent<Outline>().OutlineColor = Color.white;
-                    highlight.gameObject.GetComponent<Outline>().OutlineWidth = 7.0f;
                 }
+                
             }
             else
             {
@@ -61,6 +63,11 @@ public class OutlineSelector : MonoBehaviour
                 {
                     thisTag = highlightType[i];
                 }
+
+                /*if (highlight.tag == highlightType[5])
+                {
+                    highlight.gameObject.GetComponent<Outline>().OutlineColor = Color.red;
+                }*/
             }
         }
         
