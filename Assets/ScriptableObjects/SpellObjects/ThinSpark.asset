@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: ThinSpark
   spellDamage: 100
+  spellType: Electric

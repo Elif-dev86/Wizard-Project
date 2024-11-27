@@ -9,5 +9,7 @@ public class Spell : ScriptableObject
     public string spellName;
 
     public int spellDamage;
+
+    public string spellType;
     
 }

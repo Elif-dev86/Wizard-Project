@@ -16,6 +16,8 @@ public class InventoryManagement : MonoBehaviour
 
     public string objectSelected;
 
+    private int keyStack = 1;
+
     public bool canStack;
 
     public bool canTalk = false;
@@ -76,6 +78,21 @@ public class InventoryManagement : MonoBehaviour
                 {
                     FindObjectOfType<DialogueTrigger>().TriggerDialogue();
                 }
+
+                if (hit.collider.CompareTag("lever"))
+                {
+                    GameObject lever = hit.collider.gameObject;
+
+                    DoorManager doorManager = FindObjectOfType<DoorManager>();
+
+                    if (!lever.GetComponent<LeverPullCheck>().isPulled == true)
+                    {
+                        lever.GetComponent<LeverPullCheck>().isPulled = true;
+
+                        doorManager.CheckPullCount += 1;
+                    }
+                    
+                }
             }
         }
         
@@ -120,7 +137,7 @@ public class InventoryManagement : MonoBehaviour
 
                         canStack = true;
 
-                        UpdateStack(child, potionManagerHolder, hit);
+                        UpdatePotionStack(child, potionManagerHolder, hit);
 
                         break;
                     }
@@ -131,13 +148,48 @@ public class InventoryManagement : MonoBehaviour
 
                 }
 
+                if (objectSelected == "key" && child.CompareTag("key"))
+                {
+                    canStack = true;
+                    UpdateKeyStack(child, hit);
+
+                    break;
+                }
+                else
+                {
+                    canStack = false;
+                }
+
                 if (objectSelected == "door" && child.CompareTag("key"))
                 {
-                    Door doorManager = GameObject.FindObjectOfType<Door>();
+                    DoorManager isKeyCheck = GameObject.FindObjectOfType<DoorManager>();
 
-                    doorManager.isOpen = true;
+                    if (isKeyCheck.isKeyOnly == true)
+                    {
+                        hit.collider.GetComponent<BoxCollider>().enabled = false;
 
-                    Destroy(child);
+                        Door doorManager = GameObject.FindObjectOfType<Door>();
+
+                        doorManager.isOpen = true;
+
+                        TextMeshProUGUI textMeshPro = child.GetComponentInChildren<TextMeshProUGUI>();
+
+                        if (keyStack > 1)
+                        {
+                            keyStack--;
+                            textMeshPro.text = keyStack.ToString();
+                        }
+                        else
+                        {
+                            Destroy(child);
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+                    
                 }
             }
             
@@ -146,19 +198,35 @@ public class InventoryManagement : MonoBehaviour
         
     }
 
-    private void UpdateStack(GameObject child, PotionManager potionHolder, RaycastHit hit)
+    private void UpdatePotionStack(GameObject child, PotionManager potionManager, RaycastHit hit)
     {
         TextMeshProUGUI textMeshPro = child.GetComponentInChildren<TextMeshProUGUI>();
 
-        if (potionHolder.itemStack != 99)
+        if (potionManager.itemStack != 99)
         {
-            potionHolder.itemStack++;
-            textMeshPro.text = potionHolder.itemStack.ToString();
+            potionManager.itemStack++;
+            textMeshPro.text = potionManager.itemStack.ToString();
             Destroy(hit.collider.gameObject);
         }
         else
         {
-            textMeshPro.text = potionHolder.itemStack.ToString();
+            textMeshPro.text = potionManager.itemStack.ToString();
+        }
+    }
+
+    private void UpdateKeyStack(GameObject child, RaycastHit hit)
+    {
+        TextMeshProUGUI textMeshPro = child.GetComponentInChildren<TextMeshProUGUI>();
+
+        if (keyStack != 99)
+        {
+            keyStack++;
+            textMeshPro.text = keyStack.ToString();
+            Destroy(hit.collider.gameObject);
+        }
+        else
+        {
+            textMeshPro.text = keyStack.ToString();
         }
     }
 
@@ -202,10 +270,13 @@ public class InventoryManagement : MonoBehaviour
                         break;
 
                     case "key":
-
-                        AddKeyToInventory(inventorySlots[i].transform, keyHolder.key.keyID);
-                        Destroy(hit.collider.gameObject);
-                        break;
+                    
+                        if (!canStack)
+                        {
+                            AddKeyToInventory(inventorySlots[i].transform, keyHolder.key.keyID);
+                            Destroy(hit.collider.gameObject);
+                        }
+                            break;
                 }
 
                 break;

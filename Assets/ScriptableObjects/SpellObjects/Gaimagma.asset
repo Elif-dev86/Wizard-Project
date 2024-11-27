@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Gaimagma
   spellDamage: 25
+  spellType: Fire

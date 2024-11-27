@@ -23,6 +23,7 @@ TagManager:
   - enemy
   - key
   - door
+  - lever
   layers:
   - Default
   - TransparentFX

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Twister
   spellDamage: 25
+  spellType: Earth
