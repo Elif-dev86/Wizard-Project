@@ -24,6 +24,7 @@ TagManager:
   - key
   - door
   - lever
+  - attack
   layers:
   - Default
   - TransparentFX

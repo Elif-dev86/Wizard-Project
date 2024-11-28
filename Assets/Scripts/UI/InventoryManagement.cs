@@ -91,6 +91,12 @@ public class InventoryManagement : MonoBehaviour
 
                         doorManager.CheckPullCount += 1;
                     }
+                    else
+                    {
+                        lever.GetComponent<LeverPullCheck>().isPulled = false;
+
+                        doorManager.CheckPullCount -= 1;
+                    }
                     
                 }
             }

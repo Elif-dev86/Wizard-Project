@@ -119,25 +119,18 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
             // Rotate the character towards the target angle
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
-            // Apply gravity to the y-velocity
-            velocityY += Time.deltaTime * gravity;
-
             // Calculate the velocity vector combining movement direction, speed, and gravity
-            Vector3 velocity = transform.forward + moveDirection * moveSpeed + Vector3.up * velocityY;
+            Vector3 velocity = transform.forward + moveDirection * moveSpeed; // + Vector3.up * velocityY;
 
             // Move the character controller by the calculated velocity
             controller.Move(velocity * Time.deltaTime);
 
-            // Reset y-velocity if the character is grounded
-            if (controller.isGrounded)
-            {
-                velocityY = 0f;
-            }
-            else
-            {
-                velocityY = -12f;
-            }
         }
+        
+        // Apply gravity to the y-velocity
+        velocityY += Time.deltaTime * gravity;
+
+        controller.Move(Vector3.up * velocityY);
     }
 
     public void RotateToTarget(GameObject target)

@@ -12,29 +12,39 @@ public class PillarHitCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        SpellHolder spellHolder =  other.gameObject.GetComponent<SpellHolder>();
 
-        if (isFire)
+        if (other.gameObject.CompareTag("attack"))
         {
-            if (spellHolder.spell.spellType == "Fire")
+            SpellHolder spellHolder =  other.gameObject.GetComponent<SpellHolder>();
+
+            if (isFire)
             {
-                DoorManager doorManager = FindObjectOfType<DoorManager>();
+                if (spellHolder.spell.spellType == "Fire")
+                {
+                    DoorManager doorManager = FindObjectOfType<DoorManager>();
 
-                isActivated = true;
+                    isActivated = true;
 
-                fireParticle.SetActive(true);
+                    fireParticle.SetActive(true);
 
-                StartCoroutine(ActivateTime(doorManager));
+                    StartCoroutine(ActivateTime(doorManager));
+                }
             }
-        }
-        else if (isElectric)
-        {
+            else if (isElectric)
+            {
+
+            }
+            else if (isPoison)
+            {
+
+            }
 
         }
-        else if (isPoison)
+        else
         {
-
+            return;
         }
+        
     }
 
     private IEnumerator ActivateTime(DoorManager doorManager)
