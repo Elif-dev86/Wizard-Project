@@ -49,6 +49,8 @@ public class Skeleton : Enemy
     {
         navAgent.speed = 0;
 
+        RotateToTarget(visibleTargets[visibleTargets.Count - 1]);
+
         anim.SetTrigger("attackTrigger");
 
         yield return new WaitForSeconds(1.21f);

@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected NavMeshAgent navAgent;
 
+    [SerializeField] private GameObject fovOrigin;
     [SerializeField] private Slider enemyHealthCanvas;
 
     [SerializeField] protected string enemyName;
@@ -27,9 +28,20 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
     [SerializeField] protected float stopDistance;
     [SerializeField] protected float gravity = -12;
 
+    public float viewRadius;
+    [Range(0,360)]
+    public float viewAngle;
+
+    public LayerMask targetMask;
+    public LayerMask obstacleMask;
+
+    [SerializeField] public List<Transform> visibleTargets = new List<Transform>();
+
     protected float velocityY;
     protected Transform target;
     protected Animator anim;
+
+    public bool isChasing;
 
     protected EnemyState currentState;
 
@@ -53,6 +65,8 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
         anim = GetComponentInChildren<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        StartCoroutine("FindTargetsWithDelay", .2f);
         
         Introduction();
         ChangeState(EnemyState.Idle);
@@ -70,21 +84,22 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected virtual void UpdateState()
     {
-        float objDistance = Vector3.Distance(transform.position, target.position);
+        float objDistance = Vector3.Distance(transform.position, visibleTargets[visibleTargets.Count - 1].transform.position);
 
         objDistance = (int) objDistance;
 
         switch (currentState)
         {
             case EnemyState.Idle:
-                if (objDistance <= followDistance)
+                if (objDistance <= viewRadius)
                 {
                     ChangeState(EnemyState.Chasing);
                 }
                 break;
 
             case EnemyState.Chasing:
-                if (objDistance > followDistance)
+                
+                if (objDistance > viewRadius)
                 {
                     
                     ChangeState(EnemyState.Idle);
@@ -97,6 +112,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
                 {
                     MoveTowardsTarget();
                 }
+                
                 break;
 
             case EnemyState.Attacking:
@@ -136,16 +152,58 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         }
     }
 
+    IEnumerator FindTargetsWithDelay(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds (delay);
+            FindVisibleTargets();
+        }
+    }
+
+    void FindVisibleTargets()
+    {
+        visibleTargets.Clear();
+        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+
+        for (int i = 0; i < targetsInViewRadius.Length; i++)
+        {
+            Transform target = targetsInViewRadius[i].transform;
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
+            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle /2)
+            {
+                float dstToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                {
+                    visibleTargets.Add (target);
+
+                    ChangeState(EnemyState.Chasing);
+                }
+            }
+        }
+    }
+
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
+
+        if (!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.y;
+        }
+
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
     protected void MoveTowardsTarget()
     {
         // Calculate the direction towards the target
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (visibleTargets[visibleTargets.Count - 1].position - transform.position).normalized;
 
         // Ensure the y-component of the direction is zero to keep the enemy on the ground
         direction.y = 0;
 
         // Move the enemy towards the target
-        navAgent.SetDestination(target.position);
+        navAgent.SetDestination(visibleTargets[visibleTargets.Count -1].position);
 
         //RotateToTarget(target);
     }
@@ -192,7 +250,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         // Calculate the rotation required to look in that direction
         Quaternion lookRotation = Quaternion.LookRotation(direction * Time.deltaTime);
         // Assign the rotation to the game object
-        this.gameObject.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookRotation, rotSpeed * Time.deltaTime);
+        this.gameObject.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookRotation, 45 * Time.deltaTime);
     }
 
     // Method to perform the attack
