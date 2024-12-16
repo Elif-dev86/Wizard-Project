@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 {
@@ -13,6 +14,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     CharacterController controller;
 
     DialogueManager dialogueManager;
+
+    private NavMeshAgent playerNav;
 
     public GameObject inventory;
 
@@ -53,9 +56,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     private void Awake()
     {
-        moveAction = actions.FindActionMap("gameplay").FindAction("movement");
+        moveAction = actions.FindActionMap("gameplay").FindAction("clickToMove");
 
         actions.FindActionMap("gameplay").FindAction("toggleInventory").performed += ToggleInventory;
+        
+        moveAction.performed += OnClickPerformed;
 
         canMove = true;
     }
@@ -63,6 +68,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     void Start()
     {
         view = GetComponent<PhotonView>();
+        playerNav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         dialogueManager = FindObjectOfType<DialogueManager>();
@@ -87,13 +93,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (view.IsMine)
         {
             if (canMove == true)
             {
-                MovementHandler();
+                //MovementHandler();
             }
         }
     }
@@ -131,6 +137,23 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         velocityY += Time.deltaTime * gravity;
 
         controller.Move(Vector3.up * velocityY);
+    }
+
+    private void OnClickPerformed(InputAction.CallbackContext context)
+    {
+        if (canMove == true)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {   
+            // Move the enemy towards the target
+            playerNav.SetDestination(hit.point);
+            }
+
+        }
+
     }
 
     public void RotateToTarget(GameObject target)
@@ -180,9 +203,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     {
         canMove = false;
 
+        playerNav.isStopped = true;
+
         anim.SetTrigger("attackTrigger");
 
         yield return new WaitForSeconds(1f);
+
+        playerNav.isStopped = false;
 
         canMove = true;
     }
