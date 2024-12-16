@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -98,6 +99,17 @@ public class InventoryManagement : MonoBehaviour
                         doorManager.CheckPullCount -= 1;
                     }
                     
+                }
+
+                if (hit.collider.CompareTag("normalChest"))
+                {
+                    GameObject chest = hit.collider.gameObject;
+
+                    if (!chest.GetComponent<Chest>().isOpen)
+                    {
+                        chest.GetComponent<Chest>().OpenChest();
+                        chest.GetComponent<Chest>().isOpen = true;
+                    }
                 }
             }
         }

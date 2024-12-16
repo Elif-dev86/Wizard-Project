@@ -25,6 +25,7 @@ TagManager:
   - door
   - lever
   - attack
+  - normalChest
   layers:
   - Default
   - TransparentFX

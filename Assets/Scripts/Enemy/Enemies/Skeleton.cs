@@ -26,7 +26,6 @@ public class Skeleton : Enemy
                 navAgent.isStopped = true;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isIdle", true);
-                //Debug.Log("Entering Idle state");
                 break;
 
             case EnemyState.Chasing:

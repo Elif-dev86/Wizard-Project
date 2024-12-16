@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using UnityEditor;
 using UnityEngine;
@@ -17,14 +18,12 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected NavMeshAgent navAgent;
 
-    [SerializeField] private GameObject fovOrigin;
     [SerializeField] private Slider enemyHealthCanvas;
 
     [SerializeField] protected string enemyName;
     [SerializeField] protected int enemyMaxHealth;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float rotSpeed;
-    [SerializeField] protected float followDistance;
     [SerializeField] protected float stopDistance;
     [SerializeField] protected float gravity = -12;
 
@@ -72,7 +71,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         ChangeState(EnemyState.Idle);
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         UpdateState();
     }
@@ -84,27 +83,19 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected virtual void UpdateState()
     {
-        float objDistance = Vector3.Distance(transform.position, visibleTargets[visibleTargets.Count - 1].transform.position);
+        float objDistance = Vector3.Distance(transform.position, target.transform.position);
 
         objDistance = (int) objDistance;
 
         switch (currentState)
         {
             case EnemyState.Idle:
-                if (objDistance <= viewRadius)
-                {
-                    ChangeState(EnemyState.Chasing);
-                }
+                
                 break;
 
             case EnemyState.Chasing:
                 
-                if (objDistance > viewRadius)
-                {
-                    
-                    ChangeState(EnemyState.Idle);
-                }
-                else if (objDistance <= stopDistance)
+                if (objDistance <= stopDistance)
                 {
                     ChangeState(EnemyState.Attacking);
                 }
@@ -122,7 +113,9 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
                 }
                 else
                 {
+                    StopCoroutine("FindTargetsWithDelay");
                     PerformAttack();
+                    StartCoroutine("FindTargetsWithDelay", .2f);
                 }
                 break;
         }
@@ -168,6 +161,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
+
             Transform target = targetsInViewRadius[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle /2)
@@ -176,12 +170,34 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
-                    visibleTargets.Add (target);
-
-                    ChangeState(EnemyState.Chasing);
+                    visibleTargets.Add(target);
                 }
+                
             }
         }
+        
+        // Check if there are valid targets in view
+        bool hasValidTarget = false;
+
+        foreach (Collider targetCollider in targetsInViewRadius)
+        {
+            if (((1 << targetCollider.gameObject.layer) & targetMask) != 0) // Check if target's layer matches the targetMask
+            {
+                hasValidTarget = true;
+                break;
+            }
+        }
+
+        // Change state based on whether a valid target was found
+        if (hasValidTarget)
+        {
+            ChangeState(EnemyState.Chasing);
+        }
+        else
+        {
+            ChangeState(EnemyState.Idle);
+        }
+        
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
@@ -250,7 +266,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         // Calculate the rotation required to look in that direction
         Quaternion lookRotation = Quaternion.LookRotation(direction * Time.deltaTime);
         // Assign the rotation to the game object
-        this.gameObject.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookRotation, 45 * Time.deltaTime);
+        this.gameObject.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookRotation, 200 * Time.deltaTime);
     }
 
     // Method to perform the attack
