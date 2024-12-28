@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -26,19 +27,38 @@ public class HotBarKeys : MonoBehaviour
 
     void OnKeyPerformed(InputAction.CallbackContext context)
     {
-        if (key == ConvertPathToKeyCode(context.control.ToString()))
+        if (ConvertPathToKeyCode(context.control.ToString()) == key || ConvertPathToAlphaKeyCode(context.control.ToString()) == key)
         {
-            button.onClick.Invoke();
+            if (button != null)
+            {
+                button.onClick.Invoke();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
     private KeyCode ConvertPathToKeyCode(string path)
     {
-        string key = path.Replace("Key:/Keyboard/", "").ToUpper();
+        string keyPath = path.Replace("Key:/Keyboard/", "").ToUpper();
 
-        if (System.Enum.TryParse(key, out KeyCode keyCode))
+        if (System.Enum.TryParse(keyPath, out KeyCode keyCode))
         {
             return keyCode;
+        }
+
+        return KeyCode.None;
+    }
+
+    private KeyCode ConvertPathToAlphaKeyCode(string path)
+    {
+        string keyNum = path.Replace("Key:/Keyboard/", "Alpha");
+
+        if (System.Enum.TryParse(keyNum, out KeyCode numCode))
+        {
+            return numCode;
         }
 
         return KeyCode.None;

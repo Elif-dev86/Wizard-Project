@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     DialogueManager dialogueManager;
 
-    private NavMeshAgent playerNav;
-
     public GameObject inventory;
 
     public Slider healtBar;
@@ -35,6 +33,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     Vector3 newPosition;
 
     public bool canMove;
+
+    public bool canGravity;
 
     public bool isToggle = true;
 
@@ -56,19 +56,17 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     private void Awake()
     {
-        moveAction = actions.FindActionMap("gameplay").FindAction("clickToMove");
+        moveAction = actions.FindActionMap("gameplay").FindAction("movement");
 
         actions.FindActionMap("gameplay").FindAction("toggleInventory").performed += ToggleInventory;
-        
-        moveAction.performed += OnClickPerformed;
 
         canMove = true;
+
+        canGravity = true;
     }
 
     void Start()
     {
-        view = GetComponent<PhotonView>();
-        playerNav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         dialogueManager = FindObjectOfType<DialogueManager>();
@@ -93,16 +91,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (view.IsMine)
+        if (canMove == true)
         {
-            if (canMove == true)
-            {
-                //MovementHandler();
-            }
+            MovementHandler();
         }
-    }
+}
 
     void MovementHandler()
     {
@@ -136,24 +131,10 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         // Apply gravity to the y-velocity
         velocityY += Time.deltaTime * gravity;
 
-        controller.Move(Vector3.up * velocityY);
-    }
-
-    private void OnClickPerformed(InputAction.CallbackContext context)
-    {
-        if (canMove == true)
+        if (canGravity)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100))
-            {   
-            // Move the enemy towards the target
-            playerNav.SetDestination(hit.point);
-            }
-
+            controller.Move(Vector3.up * velocityY);
         }
-
     }
 
     public void RotateToTarget(GameObject target)
@@ -167,8 +148,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         // Assign the rotation to the game object
         this.gameObject.transform.rotation = lookRotation;
-
-        StartCoroutine(AttackTime());
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -199,17 +179,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         //Debug.Log("Player damaged by " + enemyAttack.enemyName + " for " + enemyAttack.enemyDamage + " damage.");
     }
 
-    IEnumerator AttackTime()
+    public IEnumerator AttackTime()
     {
         canMove = false;
-
-        playerNav.isStopped = true;
 
         anim.SetTrigger("attackTrigger");
 
         yield return new WaitForSeconds(1f);
-
-        playerNav.isStopped = false;
 
         canMove = true;
     }

@@ -113,6 +113,9 @@ public class HotbarManagement : MonoBehaviour
 
                     pMovement.RotateToTarget(gameObj);
 
+                    StartCoroutine(pMovement.AttackTime());
+                    StopCoroutine(pMovement.AttackTime());
+
                     Destroy(gameObj, .5f);
                 }
             }

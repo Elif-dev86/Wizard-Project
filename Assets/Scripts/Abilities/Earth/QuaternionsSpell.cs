@@ -75,6 +75,10 @@ public class QuaternionsSpell : MonoBehaviour
             distance = Vector3.Distance(startPoint, endPoint);
         }
 
+        PlayerMovement pMovement = objectToMove.GetComponent<PlayerMovement>();
+
+        pMovement.gravity = 0;
+
         StartCoroutine(WaitUntilLevitation());
 
     }
@@ -148,6 +152,8 @@ public class QuaternionsSpell : MonoBehaviour
         yield return new WaitForSeconds(secondsToDelete);
 
         PlayerMovement pMovement = objectToMove.GetComponent<PlayerMovement>();
+
+        pMovement.gravity = -12;
 
         pMovement.canMove = true;
 

@@ -30,9 +30,15 @@ public class Teleport : MonoBehaviour
     {
         targetPosition.y = 0;
 
+        player.GetComponent<PlayerMovement>().canGravity = false;
+
         yield return new WaitForSeconds(1.3f);
 
         player.transform.position = targetPosition;
+
+        yield return new WaitForSeconds(.5f);
+
+        player.GetComponent<PlayerMovement>().canGravity = true;
 
     }
 }
