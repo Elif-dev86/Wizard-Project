@@ -1046,6 +1046,7 @@ GameObject:
   - component: {fileID: 1069468420724843977}
   - component: {fileID: 4024454836903337885}
   - component: {fileID: 540904667316174193}
+  - component: {fileID: 6007562761573402482}
   m_Layer: 10
   m_Name: wizardFinal
   m_TagString: Player
@@ -1100,7 +1101,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   canMove: 1
-  canGravity: 0
+  canGravity: 1
   isToggle: 1
   maxHealth: 100
   gravity: -12
@@ -1158,6 +1159,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6007562761573402482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7156725717652261119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f995d55c72ffec4bbd1ce2f06b9d84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectID: 
 --- !u!1 &8036838357331390429
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,18 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField]
+    private LevelInstace instance;
+
+    [SerializeField]
+    private string targetSceneName;
+
+    [SerializeField]
+    private Transform spawnPoint;
+
+    [SerializeField] 
+    private float levelLoadDelay = 1f;
+
+    [SerializeField]
     GameObject[] pathPoints;
 
     [SerializeField]
@@ -26,17 +38,24 @@ public class LevelManager : MonoBehaviour
 
     private void Start() 
     {
-          player = GameObject.FindGameObjectWithTag("Player");
+      player = GameObject.FindGameObjectWithTag("Player");
 
-          rotPlayer = FindObjectOfType<PlayerMovement>();
+      rotPlayer = FindObjectOfType<PlayerMovement>();
+
+      if(instance == LevelInstace.currentInstance)
+      {
+          FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
+
+          StartCoroutine(WaitToMove());
+      }
     }
 
     private void FixedUpdate() 
     {
-          if (canFollowPath)
-          {
-               FollowPath(player);
-          }
+      if (canFollowPath)
+      {
+        FollowPath(player);
+      }
     }
 
    private void OnTriggerEnter(Collider other) 
@@ -44,13 +63,15 @@ public class LevelManager : MonoBehaviour
 
      if (other.CompareTag("Player"))
      {
-          rotPlayer.canMove = false;
-          rotPlayer.canGravity = false;
+      rotPlayer.canMove = false;
+      rotPlayer.canGravity = false;
 
-          moveToNextPoint = false;
-          canFollowPath = true;
+      rotPlayer.enabled = false;
 
-          StartCoroutine(TimeToTeleport());
+      moveToNextPoint = false;
+      canFollowPath = true;
+
+      StartCoroutine(TimeToTeleport());
      }
 
    }
@@ -84,9 +105,22 @@ public class LevelManager : MonoBehaviour
    private IEnumerator TimeToTeleport()
    {
 
+    yield return new WaitForSeconds(levelLoadDelay);
 
-    yield return new WaitForSeconds(2.5f);
+    LevelInstace.currentInstance = instance;
+    SceneManager.LoadScene(targetSceneName);
+   }
 
-    SceneManager.LoadScene("test_scene");
+   private IEnumerator WaitToMove()
+   {
+      Transform playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+
+      playerPosition.transform.rotation = spawnPoint.transform.rotation;
+
+      yield return new WaitForSeconds(1f);
+
+      rotPlayer.enabled = true;
+      rotPlayer.canMove = true;
+      rotPlayer.canGravity = true;
    }
 }
