@@ -8,7 +8,12 @@ public class Chest : MonoBehaviour
 
     public GameObject[] itemSlots;
 
+    [HideInInspector]
     public bool isOpen;
+
+    public bool isRandomItems, isSelectedItem;
+
+    private bool[] chestType;
 
     Animator anim;
 
@@ -18,27 +23,47 @@ public class Chest : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         chestCollider = GetComponent<BoxCollider>();
+
+        chestType = new bool[] {isRandomItems, isSelectedItem};
     }
 
     public void OpenChest()
     {
         if (!isOpen)
         {
-
-            anim.SetTrigger("openChest");
-
-            for (int i = 0; i < itemSlots.Length; i++)
+            if (chestType[0])
             {
+                anim.SetTrigger("openChest");
 
-                int itemsToServe = SetRandomItems();
-                
-                GameObject itemToGenerate = Instantiate(posibleItems[itemsToServe]);
+                for (int i = 0; i < itemSlots.Length; i++)
+                {
 
-                itemToGenerate.transform.position = itemSlots[i].transform.position;
+                    int itemsToServe = SetRandomItems();
+                    
+                    GameObject itemToGenerate = Instantiate(posibleItems[itemsToServe]);
 
-                itemToGenerate.transform.SetParent(itemSlots[i].transform);
-                
+                    itemToGenerate.transform.position = itemSlots[i].transform.position;
+
+                    itemToGenerate.transform.SetParent(itemSlots[i].transform);
+                    
+                }
             }
+            else if (chestType[1])
+            {
+                for (int i = 0; i < itemSlots.Length; i++)
+                {
+
+                    anim.SetTrigger("openChest");
+                    
+                    GameObject itemToGenerate = Instantiate(posibleItems[i]);
+
+                    itemToGenerate.transform.position = itemSlots[i].transform.position;
+
+                    itemToGenerate.transform.SetParent(itemSlots[i].transform);
+                    
+                }
+            }
+
         }
         else
         {

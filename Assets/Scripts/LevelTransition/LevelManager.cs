@@ -17,8 +17,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
 
-    [SerializeField] 
-    private float levelLoadDelay = 1f;
+    //[SerializeField] 
+    //private float levelLoadDelay = 1f;
 
     [SerializeField]
     GameObject[] pathPoints;
@@ -32,6 +32,10 @@ public class LevelManager : MonoBehaviour
      [SerializeField]
     bool moveToNextPoint;
 
+    private bool[] transitionType;
+
+    public bool isStairs, isStraight;
+
     GameObject player;
 
     PlayerMovement rotPlayer;
@@ -41,6 +45,8 @@ public class LevelManager : MonoBehaviour
       player = GameObject.FindGameObjectWithTag("Player");
 
       rotPlayer = FindObjectOfType<PlayerMovement>();
+
+      transitionType = new bool[] {isStairs, isStraight};
 
       if(instance == LevelInstace.currentInstance)
       {
@@ -61,18 +67,34 @@ public class LevelManager : MonoBehaviour
    private void OnTriggerEnter(Collider other) 
    {
 
-     if (other.CompareTag("Player"))
-     {
-      rotPlayer.canMove = false;
-      rotPlayer.canGravity = false;
+      if (transitionType[0])
+      {
+        if (other.CompareTag("Player"))
+        {
+          rotPlayer.canMove = false;
+          rotPlayer.canGravity = false;
 
-      rotPlayer.enabled = false;
+          rotPlayer.enabled = false;
 
-      moveToNextPoint = false;
-      canFollowPath = true;
+          moveToNextPoint = false;
+          canFollowPath = true;
 
-      StartCoroutine(TimeToTeleport());
-     }
+          StartCoroutine(TimeToTeleport(2.5f));
+        }
+      }
+      else if (transitionType[1])
+      {
+        if (other.CompareTag("Player"))
+        {
+          rotPlayer.canMove = false;
+          rotPlayer.canGravity = false;
+
+          rotPlayer.enabled = false;
+
+          StartCoroutine(TimeToTeleport(.5f));
+        }
+
+      }
 
    }
 
@@ -102,7 +124,7 @@ public class LevelManager : MonoBehaviour
         }
    }
 
-   private IEnumerator TimeToTeleport()
+   private IEnumerator TimeToTeleport(float levelLoadDelay)
    {
 
     yield return new WaitForSeconds(levelLoadDelay);

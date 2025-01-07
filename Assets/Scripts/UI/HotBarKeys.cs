@@ -18,7 +18,6 @@ public class HotBarKeys : MonoBehaviour
 
     private void Start() 
     {
-        button = GetComponentInChildren<Button>();
 
         keyAction = actions.FindActionMap("gameplay").FindAction("hotbarKeys");
 
@@ -29,6 +28,9 @@ public class HotBarKeys : MonoBehaviour
     {
         if (ConvertPathToKeyCode(context.control.ToString()) == key || ConvertPathToAlphaKeyCode(context.control.ToString()) == key)
         {
+
+            button = GetComponentInChildren<Button>();
+
             if (button != null)
             {
                 button.onClick.Invoke();

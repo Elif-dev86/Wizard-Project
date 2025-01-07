@@ -13,6 +13,7 @@ public class AttackEvent : MonoBehaviour
 
     public void AttackCall()
     {
+        
         for (int i = 0; i < attackPrefabs.Length; i++)
         {
 

@@ -15,7 +15,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     DialogueManager dialogueManager;
 
+    public static PlayerMovement instance;
+
     public GameObject inventory;
+
+    private GameObject sliderObj;
 
     public Slider healtBar;
 
@@ -56,6 +60,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     private void Awake()
     {
+        instance = this;
+
         moveAction = actions.FindActionMap("gameplay").FindAction("movement");
 
         actions.FindActionMap("gameplay").FindAction("toggleInventory").performed += ToggleInventory;
@@ -72,6 +78,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         dialogueManager = FindObjectOfType<DialogueManager>();
 
         inventory = GameObject.FindGameObjectWithTag("InventorySlot");
+        sliderObj = GameObject.FindGameObjectWithTag("playerHealth");
+        healtBar = sliderObj.GetComponent<Slider>();
 
         inventoryTransform = inventory.transform;
 
@@ -168,9 +176,13 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     private void OnTriggerExit(Collider other)
     {
-        inventory.GetComponent<InventoryManagement>().canTalk = false;
+        if (other.CompareTag("talkDistance"))
+        {
+            inventory.GetComponent<InventoryManagement>().canTalk = false;
 
-        dialogueManager.anim.SetBool("isOpen", false);
+            dialogueManager.anim.SetBool("isOpen", false);
+        }
+        
     }
 
     public void TakeEnemyDamage(EnemyAttack enemyAttack)
@@ -192,6 +204,9 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     public void ToggleInventory(InputAction.CallbackContext context)
     {
+
+        inventory = GameObject.FindGameObjectWithTag("InventorySlot");
+        inventoryTransform = inventory.transform;
 
         if (context.performed)
         {

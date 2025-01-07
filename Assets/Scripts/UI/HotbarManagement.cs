@@ -9,6 +9,8 @@ public class HotbarManagement : MonoBehaviour
 {
     InventoryManagement inventoryManagement;
 
+    ActivateAttack attackIsSelected;
+
     public InputActionAsset actions;
 
     private InputAction clickAction;
@@ -46,6 +48,8 @@ public class HotbarManagement : MonoBehaviour
         pMovement = FindObjectOfType<PlayerMovement>();
 
         inventoryManagement = FindObjectOfType<InventoryManagement>();
+
+        attackIsSelected = FindObjectOfType<ActivateAttack>();
         
     }
 
@@ -63,6 +67,11 @@ public class HotbarManagement : MonoBehaviour
         else
         {
             testRecticle.SetActive(false);
+        }
+
+        if (!pMovement)
+        {
+            pMovement = FindObjectOfType<PlayerMovement>();
         }
         
     }
@@ -121,6 +130,19 @@ public class HotbarManagement : MonoBehaviour
             }
             canSelectTarget = false;
             inventoryManagement.canSelectTarget = false;
+
+            for (int i = 0; i < hotBarSlots.Length; i++)
+            {
+                Transform slot = hotBarSlots[i].transform;
+
+                if (slot.childCount > 0 )
+                {
+                    GameObject child = slot.GetChild(0).gameObject;
+                    
+                    child.GetComponent<ActivateAttack>().isSelected = false;
+                }
+            }
+
         }
     }
 

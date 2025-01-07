@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class InventoryManagement : MonoBehaviour
 {
+    public static InventoryManagement instance;
+
     public HotbarManagement hotbarManagement;
 
     public InventoryObjects inventoryObjects;
@@ -24,6 +26,11 @@ public class InventoryManagement : MonoBehaviour
     public bool canTalk = false;
 
     private int[] avalibeSlots;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -294,7 +301,7 @@ public class InventoryManagement : MonoBehaviour
                             AddKeyToInventory(inventorySlots[i].transform, keyHolder.key.keyID);
                             Destroy(hit.collider.gameObject);
                         }
-                            break;
+                        break;
                 }
 
                 break;
@@ -303,16 +310,16 @@ public class InventoryManagement : MonoBehaviour
     }
 
     // Method to add an item to a specific slot
-    private void AddAttackToInventory(Transform slotTransform, string attack_ID)
+    public void AddAttackToInventory(Transform slotTransform, string book_ID)
     {
         for (int i = 0; i < inventoryObjects.attacks.Length; i++)
         {
-            if (attack_ID == inventoryObjects.attacks[i].name)
+            if (book_ID == inventoryObjects.attacks[i].name)
             {
 
                 Button newItem = Instantiate(inventoryObjects.attacks[i], slotTransform);
 
-                newItem.name = attack_ID;
+                newItem.name = book_ID;
 
                 newItem.transform.localPosition = Vector3.zero;
 
@@ -322,7 +329,7 @@ public class InventoryManagement : MonoBehaviour
         
     }
 
-    private void AddPotionToInventory(Transform slotTransform, string potion_ID)
+    public void AddPotionToInventory(Transform slotTransform, string potion_ID)
     {
 
         for (int i = 0; i < inventoryObjects.potions.Length; i++)
@@ -340,7 +347,7 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
-    private void AddWeaponToInventory(Transform slotTransform, string weapon_ID)
+    public void AddWeaponToInventory(Transform slotTransform, string weapon_ID)
     {
         //Debug.Log("I made it here");
 
@@ -357,7 +364,7 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
-    private void AddKeyToInventory(Transform slotTransform, string key_ID)
+    public void AddKeyToInventory(Transform slotTransform, string key_ID)
     {
         for (int i  = 0; i < inventoryObjects.keys.Length; i++)
         {

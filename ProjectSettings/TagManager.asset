@@ -26,6 +26,7 @@ TagManager:
   - lever
   - attack
   - normalChest
+  - ui
   layers:
   - Default
   - TransparentFX
