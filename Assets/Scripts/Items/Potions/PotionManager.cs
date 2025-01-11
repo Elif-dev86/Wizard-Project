@@ -9,14 +9,15 @@ public class PotionManager : MonoBehaviour
 
     public int healAmount;
 
-    [HideInInspector]
+    //[HideInInspector]
     public int itemStack = 1;
 
     PlayerMovement pMovement;
 
     InventoryManagement iManagement;
 
-    TextMeshProUGUI textMeshPro;
+    [HideInInspector]
+    public TextMeshProUGUI textMeshPro;
 
     private void Start()
     {

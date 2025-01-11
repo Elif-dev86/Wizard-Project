@@ -172,6 +172,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         {
             inventory.GetComponent<InventoryManagement>().canTalk = true;
         }
+
+        if (other.CompareTag("saveStation"))
+        {
+            other.GetComponentInParent<SaveStation>().canInteract = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -182,7 +187,11 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
             dialogueManager.anim.SetBool("isOpen", false);
         }
-        
+
+        if (other.CompareTag("saveStation"))
+        {
+            other.GetComponentInParent<SaveStation>().canInteract = false;
+        }
     }
 
     public void TakeEnemyDamage(EnemyAttack enemyAttack)
@@ -238,6 +247,24 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         }
 
     }
+
+    /*public void SavePlayer()
+    {
+        SaveOutput.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+       PlayerData data = SaveOutput.LoadPlayer();
+
+       healtBar.value = data.level;
+
+       Vector3 position;
+       position.x = data.position[0];
+       position.y = data.position[1];
+       position.z = data.position[2];
+       transform.position = position;
+    }*/
 
     public void OnEnable()
     {

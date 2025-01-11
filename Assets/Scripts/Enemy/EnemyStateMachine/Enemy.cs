@@ -236,11 +236,6 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         }
     }
 
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        
-    }
-
     public void TakeDamage(Spell spell)
     {
         enemyHealthCanvas.value -= spell.spellDamage;

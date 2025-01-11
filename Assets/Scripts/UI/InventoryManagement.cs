@@ -77,9 +77,20 @@ public class InventoryManagement : MonoBehaviour
 
                 if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Collectable"))
                 {
-                    objectSelected = hit.collider.tag;
+                    PlayerMovement player = GameObject.FindObjectOfType<PlayerMovement>();
 
-                    ManageInventory(objectSelected, hit);
+                    float distance = Vector3.Distance(hit.collider.gameObject.transform.position, player.transform.position);
+
+                    if (distance < 10)
+                    {
+                        objectSelected = hit.collider.tag;
+
+                        ManageInventory(objectSelected, hit);
+                    }
+                    else
+                    {
+                        Debug.Log("Too Far Away!");
+                    }
                 }
 
                 if (canTalk == true && hit.collider.CompareTag("NPC"))
@@ -340,6 +351,8 @@ public class InventoryManagement : MonoBehaviour
             {
                 Button newItem = Instantiate(inventoryObjects.potions[i], slotTransform);
 
+                newItem.name = potion_ID;
+
                 newItem.transform.localPosition = Vector3.zero;
 
                 //Debug.Log("Added item: " + newItem.name + " to slot: " + slotTransform.name);
@@ -357,6 +370,8 @@ public class InventoryManagement : MonoBehaviour
             {
                 Button newItem = Instantiate(inventoryObjects.weapons[i], slotTransform);
 
+                newItem.name = weapon_ID;
+
                 newItem.transform.localPosition = Vector3.zero;
 
                 //Debug.Log("Added item: " + newItem.name + " to slot: " + slotTransform.name);
@@ -371,6 +386,8 @@ public class InventoryManagement : MonoBehaviour
             if (key_ID == inventoryObjects.keys[i].name)
             {
                 Button newItem = Instantiate(inventoryObjects.keys[i], slotTransform);
+
+                newItem.name = key_ID;
 
                 newItem.transform.localPosition = Vector3.zero;
             }
