@@ -21,6 +21,8 @@ public class InventoryManagement : MonoBehaviour
 
     private int keyStack = 1;
 
+    public int objectCollectDistance;
+
     public bool canStack;
 
     public bool canTalk = false;
@@ -81,7 +83,7 @@ public class InventoryManagement : MonoBehaviour
 
                     float distance = Vector3.Distance(hit.collider.gameObject.transform.position, player.transform.position);
 
-                    if (distance < 10)
+                    if (distance < objectCollectDistance)
                     {
                         objectSelected = hit.collider.tag;
 

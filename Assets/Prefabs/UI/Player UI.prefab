@@ -7188,6 +7188,7 @@ MonoBehaviour:
   - {fileID: 7116425420344154042}
   canSelectTarget: 0
   objectSelected: 
+  objectCollectDistance: 13
   canStack: 0
   canTalk: 0
 --- !u!114 &2713486299285747169
