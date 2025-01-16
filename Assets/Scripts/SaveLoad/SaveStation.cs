@@ -9,6 +9,11 @@ public class SaveStation : MonoBehaviour
 
     private InputAction clickAction;
 
+    private PlayerMovement player;
+
+    public InventoryManagement inventory;
+
+    private GameManager manager;
     public GameObject saveMenu;
     
     public bool canInteract;
@@ -18,6 +23,11 @@ public class SaveStation : MonoBehaviour
         clickAction = actions.FindActionMap("Gameplay").FindAction("pointClick");
 
         clickAction.performed += OnClickPerformed;    
+    }
+
+    private void Start() 
+    {
+        manager = GameObject.FindObjectOfType<GameManager>();
     }
 
     private void OnClickPerformed(InputAction.CallbackContext context)
@@ -38,6 +48,39 @@ public class SaveStation : MonoBehaviour
             }
         }
 
+    }
+
+    public void SaveGame()
+    {
+        inventory = GameObject.FindObjectOfType<InventoryManagement>();
+        player = GameManager.FindObjectOfType<PlayerMovement>();
+
+        for (int i = 0; i < inventory.inventorySlots.Length; i++)
+        {
+            Transform slot = inventory.inventorySlots[i].transform;
+
+            if (slot.childCount > 0)
+            {
+                GameObject child = slot.GetChild(0).gameObject;
+
+                manager.inventoryItemData[i] = child.name;
+
+                if (child.CompareTag("potion"))
+                {
+                    int potionStackCount = child.GetComponent<PotionManager>().itemStack;
+
+                    manager.potionStackIndex[i] = potionStackCount;
+                }
+            }
+            else
+            {
+                manager.inventoryItemData[i] = "";
+            }
+        }
+
+        //player.SavePlayer();
+
+        SaveOutput.SavePlayer(manager);
     }
 
     public void Resume()

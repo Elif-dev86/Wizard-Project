@@ -28,40 +28,7 @@ public class GameManager : MonoBehaviour
         inventory = GameObject.FindObjectOfType<InventoryManagement>();
         player = GameManager.FindObjectOfType<PlayerMovement>();
 
-        //LoadInventory();
-    }
-
-    public void SaveInventory()
-    {
-        inventory = GameObject.FindObjectOfType<InventoryManagement>();
-        player = GameManager.FindObjectOfType<PlayerMovement>();
-
-        for (int i = 0; i < inventory.inventorySlots.Length; i++)
-        {
-            Transform slot = inventory.inventorySlots[i].transform;
-
-            if (slot.childCount > 0)
-            {
-                GameObject child = slot.GetChild(0).gameObject;
-
-                inventoryItemData[i] = child.name;
-
-                if (child.CompareTag("potion"))
-                {
-                    int potionStackCount = child.GetComponent<PotionManager>().itemStack;
-
-                    potionStackIndex[i] = potionStackCount;
-                }
-            }
-            else
-            {
-                inventoryItemData[i] = "";
-            }
-        }
-
-        //player.SavePlayer();
-
-        SaveOutput.SavePlayer(this);
+        LoadInventory();
     }
 
     public void LoadInventory()
@@ -76,8 +43,8 @@ public class GameManager : MonoBehaviour
         {
             Transform slot = inventory.inventorySlots[i].transform;
             
-            inventoryItemData[i] = data.items[i];
-            potionStackIndex[i] = data.itemStackIndex[i];
+            //inventoryItemData[i] = data.items[i];
+            //potionStackIndex[i] = data.itemStackIndex[i];
 
             inventory.AddAttackToInventory(slot, inventoryItemData[i]);
 
