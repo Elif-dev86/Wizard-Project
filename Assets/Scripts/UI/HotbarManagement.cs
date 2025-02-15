@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -99,9 +100,11 @@ public class HotbarManagement : MonoBehaviour
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100))
+        {
             Debug.DrawLine(ray.origin, hit.point, Color.green);
 
             testRecticle.transform.position = hit.point;
+        }
     }
 
     private void OnClickPerformed(InputAction.CallbackContext context)
@@ -115,6 +118,8 @@ public class HotbarManagement : MonoBehaviour
             {
                 if (context.performed)
                 {
+                    CheckForInitiatedAttack();
+
                     GameObject gameObj = Instantiate(attackTarget);
                     gameObj.transform.position = hit.point;
 
@@ -143,6 +148,31 @@ public class HotbarManagement : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    void CheckForInitiatedAttack()
+    {
+        for(int i = 0; i < hotBarSlots.Length; i++)
+        {
+            Transform slot = hotBarSlots[i].transform;
+
+            if (slot.childCount > 0 )
+            {
+                GameObject child = slot.GetChild(0).gameObject;
+
+                ActivateAttack activateAttack = child.GetComponent<ActivateAttack>();
+
+                if (activateAttack.isSelected)
+                {
+                    CoolDownTimer coolDown = child.GetComponentInChildren<CoolDownTimer>();
+
+                    coolDown.image.enabled = true;
+                    coolDown.timerValue = 1;
+
+                    coolDown.startTimer = true;
+                }
+            }
         }
     }
 

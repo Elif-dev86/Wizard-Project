@@ -28,6 +28,8 @@ TagManager:
   - normalChest
   - ui
   - saveStation
+  - inventorySlot
+  - hotBarSlot
   layers:
   - Default
   - TransparentFX

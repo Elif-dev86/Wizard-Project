@@ -25,11 +25,6 @@ public class SaveStation : MonoBehaviour
         clickAction.performed += OnClickPerformed;    
     }
 
-    private void Start() 
-    {
-        manager = GameObject.FindObjectOfType<GameManager>();
-    }
-
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
         
@@ -52,6 +47,7 @@ public class SaveStation : MonoBehaviour
 
     public void SaveGame()
     {
+        manager = GameObject.FindObjectOfType<GameManager>();
         inventory = GameObject.FindObjectOfType<InventoryManagement>();
         player = GameManager.FindObjectOfType<PlayerMovement>();
 

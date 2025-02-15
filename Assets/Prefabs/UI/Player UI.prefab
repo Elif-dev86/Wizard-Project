@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 362920634011036595}
   m_Layer: 5
   m_Name: slot (16)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 8623493372020409589}
   m_Layer: 5
   m_Name: slot (3)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 1574632629401206381}
   m_Layer: 5
   m_Name: slot (14)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 5594544131067491200}
   m_Layer: 5
   m_Name: HotbarSlot (2)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,6 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 114
+  isReady: 1
 --- !u!114 &8427755002990760621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +607,7 @@ GameObject:
   - component: {fileID: 8183522024581481421}
   m_Layer: 5
   m_Name: slot (15)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -735,7 +736,7 @@ GameObject:
   - component: {fileID: 6560396885994717848}
   m_Layer: 5
   m_Name: HotbarSlot (4)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -811,6 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 49
+  isReady: 1
 --- !u!114 &804010883864218536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +865,7 @@ GameObject:
   - component: {fileID: 1666231953684440940}
   m_Layer: 5
   m_Name: slot (38)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1303,7 +1305,7 @@ GameObject:
   - component: {fileID: 8665202835260121542}
   m_Layer: 5
   m_Name: slot (19)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1568,7 +1570,7 @@ GameObject:
   - component: {fileID: 684328887056224217}
   m_Layer: 5
   m_Name: slot (26)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1697,7 +1699,7 @@ GameObject:
   - component: {fileID: 413702744665931851}
   m_Layer: 5
   m_Name: slot (37)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1826,7 +1828,7 @@ GameObject:
   - component: {fileID: 6211327720311437777}
   m_Layer: 5
   m_Name: slot (39)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2089,7 +2091,7 @@ GameObject:
   - component: {fileID: 3651050099729290713}
   m_Layer: 5
   m_Name: slot (30)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2218,7 +2220,7 @@ GameObject:
   - component: {fileID: 5910008042500591669}
   m_Layer: 5
   m_Name: slot (0)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2347,7 +2349,7 @@ GameObject:
   - component: {fileID: 8706136895940851632}
   m_Layer: 5
   m_Name: slot (36)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2744,7 +2746,7 @@ GameObject:
   - component: {fileID: 353546934111070393}
   m_Layer: 5
   m_Name: slot (27)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2993,7 +2995,7 @@ GameObject:
   - component: {fileID: 7878417239451092533}
   m_Layer: 5
   m_Name: HotbarSlot (5)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3069,6 +3071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 50
+  isReady: 1
 --- !u!114 &2649995731739043729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,7 +3124,7 @@ GameObject:
   - component: {fileID: 5398608561959205382}
   m_Layer: 5
   m_Name: slot (24)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3250,7 +3253,7 @@ GameObject:
   - component: {fileID: 6513810393851751893}
   m_Layer: 5
   m_Name: HotbarSlot (1)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3326,6 +3329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 101
+  isReady: 1
 --- !u!114 &8039640156764106330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,7 +3450,7 @@ GameObject:
   - component: {fileID: 5119601971046179815}
   m_Layer: 5
   m_Name: slot (1)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3575,7 +3579,7 @@ GameObject:
   - component: {fileID: 1290119047736953987}
   m_Layer: 5
   m_Name: slot (33)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3704,7 +3708,7 @@ GameObject:
   - component: {fileID: 170199638801092000}
   m_Layer: 5
   m_Name: slot (21)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3933,7 +3937,7 @@ GameObject:
   - component: {fileID: 3968612048266417481}
   m_Layer: 5
   m_Name: slot (4)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4062,7 +4066,7 @@ GameObject:
   - component: {fileID: 6397118808704475946}
   m_Layer: 5
   m_Name: slot (5)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4191,7 +4195,7 @@ GameObject:
   - component: {fileID: 3258774415838467311}
   m_Layer: 5
   m_Name: slot (31)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4320,7 +4324,7 @@ GameObject:
   - component: {fileID: 3959165113328356252}
   m_Layer: 5
   m_Name: slot (29)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4583,7 +4587,7 @@ GameObject:
   - component: {fileID: 4608481532210103073}
   m_Layer: 5
   m_Name: slot (20)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5218,7 +5222,7 @@ GameObject:
   - component: {fileID: 7431229916175790450}
   m_Layer: 5
   m_Name: HotbarSlot (0)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5294,6 +5298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 113
+  isReady: 1
 --- !u!114 &2759971589795239537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5555,7 +5560,7 @@ GameObject:
   - component: {fileID: 1483720721279498372}
   m_Layer: 5
   m_Name: slot (17)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5684,7 +5689,7 @@ GameObject:
   - component: {fileID: 103214680317049273}
   m_Layer: 5
   m_Name: slot (34)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5813,7 +5818,7 @@ GameObject:
   - component: {fileID: 5025905927456941001}
   m_Layer: 5
   m_Name: slot (9)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6153,7 +6158,7 @@ GameObject:
   - component: {fileID: 2321584047381257064}
   m_Layer: 5
   m_Name: slot (18)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6282,7 +6287,7 @@ GameObject:
   - component: {fileID: 4467349382064844543}
   m_Layer: 5
   m_Name: slot (35)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6411,7 +6416,7 @@ GameObject:
   - component: {fileID: 8726663803340215313}
   m_Layer: 5
   m_Name: HotbarSlot (3)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6487,6 +6492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 102
+  isReady: 1
 --- !u!114 &1992630660590633979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6539,7 +6545,7 @@ GameObject:
   - component: {fileID: 4933054155746283643}
   m_Layer: 5
   m_Name: slot (7)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6668,7 +6674,7 @@ GameObject:
   - component: {fileID: 4393675449747095185}
   m_Layer: 5
   m_Name: slot (2)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6931,7 +6937,7 @@ GameObject:
   - component: {fileID: 7212110672163404294}
   m_Layer: 5
   m_Name: HotbarSlot (6)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7007,6 +7013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 51
+  isReady: 1
 --- !u!114 &5871168849524523567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7454,7 +7461,7 @@ GameObject:
   - component: {fileID: 6276805904241968383}
   m_Layer: 5
   m_Name: HotbarSlot (7)
-  m_TagString: Untagged
+  m_TagString: hotBarSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7530,6 +7537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 9895bc41a12ce294dbf48e289007716a, type: 3}
   key: 52
+  isReady: 1
 --- !u!114 &7324585126424410818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7582,7 +7590,7 @@ GameObject:
   - component: {fileID: 919568952236037184}
   m_Layer: 5
   m_Name: slot (25)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7711,7 +7719,7 @@ GameObject:
   - component: {fileID: 9032810958229142151}
   m_Layer: 5
   m_Name: slot (11)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7840,7 +7848,7 @@ GameObject:
   - component: {fileID: 7959950870184257689}
   m_Layer: 5
   m_Name: slot (23)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7969,7 +7977,7 @@ GameObject:
   - component: {fileID: 5065000585635283895}
   m_Layer: 5
   m_Name: slot (32)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8234,7 +8242,7 @@ GameObject:
   - component: {fileID: 985480480266985015}
   m_Layer: 5
   m_Name: slot (6)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8363,7 +8371,7 @@ GameObject:
   - component: {fileID: 9195828572225337075}
   m_Layer: 5
   m_Name: slot (22)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8492,7 +8500,7 @@ GameObject:
   - component: {fileID: 2157699804208204133}
   m_Layer: 5
   m_Name: slot (12)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8621,7 +8629,7 @@ GameObject:
   - component: {fileID: 8268225557619423149}
   m_Layer: 5
   m_Name: slot (13)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8750,7 +8758,7 @@ GameObject:
   - component: {fileID: 8607485864610849184}
   m_Layer: 5
   m_Name: slot (28)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8879,7 +8887,7 @@ GameObject:
   - component: {fileID: 5269730507762506271}
   m_Layer: 5
   m_Name: slot (10)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9008,7 +9016,7 @@ GameObject:
   - component: {fileID: 1209570455579419123}
   m_Layer: 5
   m_Name: slot (8)
-  m_TagString: Untagged
+  m_TagString: inventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

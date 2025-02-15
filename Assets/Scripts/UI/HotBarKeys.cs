@@ -16,6 +16,8 @@ public class HotBarKeys : MonoBehaviour
 
     public KeyCode key;
 
+    public bool isReady = true;
+
     private void Start() 
     {
 
@@ -31,7 +33,7 @@ public class HotBarKeys : MonoBehaviour
 
             button = GetComponentInChildren<Button>();
 
-            if (button != null)
+            if (button != null && isReady)
             {
                 button.onClick.Invoke();
             }
