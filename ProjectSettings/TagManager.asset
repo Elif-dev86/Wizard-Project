@@ -30,6 +30,7 @@ TagManager:
   - saveStation
   - inventorySlot
   - hotBarSlot
+  - itemDescription
   layers:
   - Default
   - TransparentFX

@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CooldownTimer
       objectReference: {fileID: 0}
+    - target: {fileID: 5677078712927677879, guid: 3902b1baddc99954dab1afe1721ca4ab, type: 3}
+      propertyPath: coolDownTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

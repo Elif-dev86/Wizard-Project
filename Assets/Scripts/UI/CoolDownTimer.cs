@@ -25,7 +25,7 @@ public class CoolDownTimer : MonoBehaviour
 
     ActivateAttack activateAttack;
 
-    HotBarKeys spellIsReady;
+    public HotBarKeys spellIsReady;
 
     void Start()
     {
@@ -55,6 +55,8 @@ public class CoolDownTimer : MonoBehaviour
         if (startTimer)
         {
 
+            activateAttack.CheckForHotbarSlot();
+
             timerValue -= Time.deltaTime / coolDownTime;
 
             spellIsReady.isReady = false;
@@ -68,8 +70,6 @@ public class CoolDownTimer : MonoBehaviour
              // Calculate remaining time as an integer
             int remainingTime = Mathf.CeilToInt(coolDownTime * timerValue);
             countDown.text = remainingTime.ToString();
-
-            Debug.Log(remainingTime);
 
             if (timerValue <= 0)
             {

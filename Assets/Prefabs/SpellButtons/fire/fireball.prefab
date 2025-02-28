@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7768146123084722851}
   - component: {fileID: -8738416407768559797}
   - component: {fileID: 5428656285705648897}
+  - component: {fileID: 1143755911884658379}
   - component: {fileID: 2366034201987322834}
   m_Layer: 5
   m_Name: fireball
@@ -107,6 +108,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7768146123084722851}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &1143755911884658379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160806578709647492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: FireBall
+  itemDescriptionText: A searing orb of fire launched from your staff, scorching
+    enemies in its path. Explodes on impact, dealing area damage and igniting foes
+    for additional burn damage over time.
 --- !u!114 &2366034201987322834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +272,10 @@ PrefabInstance:
     - target: {fileID: 5304985784179949484, guid: 3902b1baddc99954dab1afe1721ca4ab, type: 3}
       propertyPath: m_Name
       value: CooldownTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677078712927677879, guid: 3902b1baddc99954dab1afe1721ca4ab, type: 3}
+      propertyPath: coolDownTime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

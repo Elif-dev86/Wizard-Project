@@ -8,7 +8,7 @@ public class ActivateAttack : MonoBehaviour
 {
 
     [SerializeField]
-    private bool inInvertory;
+    public bool inInvertory;
 
     public bool isSelected = false;
 
@@ -67,10 +67,24 @@ public class ActivateAttack : MonoBehaviour
         }
         else
         {
-            inInvertory= false;
+            inInvertory = false;
         }
 
         return inInvertory;
+    }
+
+    public void CheckForHotbarSlot()
+    {
+        CoolDownTimer coolDownTimer = GetComponentInChildren<CoolDownTimer>();
+            
+        GameObject slot = transform.parent.gameObject;
+
+        HotBarKeys hotBarKeys = slot.GetComponent<HotBarKeys>();
+
+        if (hotBarKeys != null)
+        {
+            coolDownTimer.spellIsReady = hotBarKeys;
+        }
     }
 
 }

@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         {
             newPosition = inventoryTransform.position;
 
-            newPosition.x = 2150;
+            newPosition.x = 3100;
 
             inventoryTransform.position = newPosition;
         }
@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     public void ToggleInventory(InputAction.CallbackContext context)
     {
 
-        inventory = GameObject.FindGameObjectWithTag("InventorySlot");
+        //inventory = GameObject.FindGameObjectWithTag("InventorySlot");
         inventoryTransform = inventory.transform;
 
         if (context.performed)
@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
                 newPosition = inventoryTransform.position;
 
-                newPosition.x = 2150;
+                newPosition.x = 3100;
 
                 inventoryTransform.position = newPosition;
 

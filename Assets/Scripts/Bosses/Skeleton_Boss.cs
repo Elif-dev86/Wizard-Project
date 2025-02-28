@@ -5,21 +5,14 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Skeleton_Boss : Enemy
+public class Skeleton_Boss : BossMachine
 {
     private string[] attacks = { "attackTrigger_1", "attackTrigger_2", "attackTrigger_3"};
-
-    protected override void Start()
-    {
-        base.Start();
-
-        anim = this.GetComponent<Animator>();
-    }
 
     [SerializeField] public float attackCoolDown = 3f;
     private float lastAttackTime;
 
-    protected override void PerformAttack()
+    protected void PerformAttack()
     {
         if (Time.time >= lastAttackTime + attackCoolDown)
         {
@@ -28,11 +21,12 @@ public class Skeleton_Boss : Enemy
         }
     }
 
-    protected override void OnStateEnter(EnemyState state)
+    protected override void OnStateEnter(BossState state)
     {
         switch (state)
         {
-            case EnemyState.Idle:
+
+            case BossState.Idle:
                 // Do something when entering idle state
                 navAgent.isStopped = true;
                 anim.SetBool("isWalking", false);
@@ -40,7 +34,7 @@ public class Skeleton_Boss : Enemy
                 //Debug.Log("Entering Idle state");
                 break;
 
-            case EnemyState.Chasing:
+            case BossState.Melee:
                 // For example, play a chasing animation or sound
                 navAgent.isStopped = false;
                 anim.SetBool("isIdle", false);
@@ -48,7 +42,7 @@ public class Skeleton_Boss : Enemy
                 //Debug.Log("Entering Chasing state");
                 break;
 
-            case EnemyState.Attacking:
+            case BossState.Attacking:
                 // For example, play an attacking animation or sound
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isIdle", false);
