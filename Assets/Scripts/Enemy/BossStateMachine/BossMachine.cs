@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossMachine : MonoBehaviour
+public abstract class BossMachine : MonoBehaviour
 {
     public enum BossState
     {
         BattleStart,
         Idle,
-        Melee,
-        Attacking
+        Walking,
+        MeleeAttack,
+        RangedAttack,
+        SpecialAttack_1,
+        SpecialAttack_2,
     }
 
     protected NavMeshAgent navAgent;
@@ -30,6 +33,28 @@ public class BossMachine : MonoBehaviour
     [SerializeField] protected float stopDistance;
     protected float velocityY;
 
+    [SerializeField]
+    protected GameObject rangePoint;
+
+    [SerializeField]
+    protected GameObject aoePoint;
+
+    protected Vector3 direction;
+
+    [SerializeField]
+    protected float speed = 10f;
+
+    protected float progress = 0f;
+
+    protected float distance;
+
+    [SerializeField]
+    protected float height = 5f;
+
+    protected Vector3 startPoint;
+
+    protected Vector3 endPoint;
+
     Transform target;
 
     protected virtual void Start()
@@ -48,7 +73,6 @@ public class BossMachine : MonoBehaviour
         navAgent.stoppingDistance = stopDistance;
 
         StartCoroutine(BattleInitializer());
-        StopCoroutine(BattleInitializer());
     }
 
     protected virtual void Update()
@@ -59,17 +83,10 @@ public class BossMachine : MonoBehaviour
     protected virtual void UpdateState()
     {
 
-        float targetDistance = Vector3.Distance(transform.position, targets[0].transform.position);
-
-        targetDistance = (int) targetDistance;
-
         switch (currentState)
         {
 
             case BossState.BattleStart:
-
-                //StartCoroutine(BattleInitializer());
-                //StopCoroutine(BattleInitializer());
 
                 break;
 
@@ -77,28 +94,26 @@ public class BossMachine : MonoBehaviour
                 
                 break;
 
-            case BossState.Melee:
-
-                if (targetDistance <= stopDistance)
-                {
-                    ChangeState(BossState.Attacking);
-                }
-                else
-                {
-                    MoveTowardsTarget();
-                }
+            case BossState.Walking:
                 
                 break;
 
-            case BossState.Attacking:
-
-                Debug.Log("is attacking");
-                if (targetDistance > stopDistance)
-                {
-                    ChangeState(BossState.Melee);
-                }
+            case BossState.MeleeAttack:
 
                 break;
+
+            case BossState.RangedAttack:
+
+            break;
+
+            case BossState.SpecialAttack_1:
+
+                break;
+
+            case BossState.SpecialAttack_2:
+
+                break;
+
         }
     }
 
@@ -137,7 +152,7 @@ public class BossMachine : MonoBehaviour
 
         navAgent.isStopped = false;
 
-        ChangeState(BossState.Melee);
+        ChangeState(BossState.Walking);
     }
     
     protected virtual void OnStateEnter(BossState state)
@@ -152,11 +167,11 @@ public class BossMachine : MonoBehaviour
                 // Do something when entering idle state
                 break;
 
-            case BossState.Melee:
+            case BossState.Walking:
                 // For example, play a chasing animation or sound
                 break;
 
-            case BossState.Attacking:
+            case BossState.MeleeAttack:
                 // For example, play an attacking animation or sound
                 break;
         }
