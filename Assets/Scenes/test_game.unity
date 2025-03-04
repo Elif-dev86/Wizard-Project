@@ -24152,7 +24152,7 @@ Transform:
   m_GameObject: {fileID: 1966990682}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 123.92, y: -0.02, z: 87.4}
+  m_LocalPosition: {x: 123.92, y: -0.02, z: 90.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36021,6 +36021,7 @@ MonoBehaviour:
   attackCoolDown: 3
   projectileSpeed: 60
   jumpNow: 0
+  aoeNow: 0
   canThrow: 1
   projectilePrefab: {fileID: 2715164968206682069, guid: c23c369cd67beaf479da03f61bec4104, type: 3}
 --- !u!4 &4579791574710950907

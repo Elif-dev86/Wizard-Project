@@ -16,6 +16,8 @@ public class Skeleton_Boss : BossMachine
 
     public bool jumpNow;
 
+    public bool aoeNow;
+
     public bool canThrow = true;
 
     public GameObject projectilePrefab;
@@ -60,6 +62,11 @@ public class Skeleton_Boss : BossMachine
                     CalculateDistanceBetweenObjects(rangePoint, this.gameObject);
 
                     ChangeState(BossState.RangedAttack);
+                }
+
+                if (aoeNow)
+                {
+                    ChangeState(BossState.SpecialAttack_1);
                 }
                 
                 break;
@@ -126,7 +133,12 @@ public class Skeleton_Boss : BossMachine
 
             case BossState.SpecialAttack_1:
 
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isIdle", false);
+
                 CalculateDistanceBetweenObjects(aoePoint, this.gameObject);
+
+                StartCoroutine(PerformAOEAttack());
 
                 break;
         }
@@ -174,6 +186,8 @@ public class Skeleton_Boss : BossMachine
 
     private IEnumerator JumpToPoint()
     {
+
+        this.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
         
         while (progress < 1.1f)
         {
@@ -195,6 +209,8 @@ public class Skeleton_Boss : BossMachine
 
             yield return null;
         }
+
+        ResetJumpDistance();
         
     }
 
@@ -248,13 +264,7 @@ public class Skeleton_Boss : BossMachine
 
         yield return new WaitForSeconds(2);
 
-        startPoint = Vector3.zero;
-
-        endPoint = Vector3.zero;
-
-        distance = 0;
-
-        progress = 0;
+        ResetJumpDistance();
 
         canThrow = true;
 
@@ -263,6 +273,27 @@ public class Skeleton_Boss : BossMachine
         ChangeState(BossState.Walking);
 
     }
+
+    private IEnumerator PerformAOEAttack()
+    {
+        StartCoroutine(JumpToPoint());
+
+        yield return new WaitForSeconds(1.5f);
+        
+        anim.SetTrigger("shield_slam");
+
+    }
+
+    private void ResetJumpDistance()
+    {
+        startPoint = Vector3.zero;
+
+        endPoint = Vector3.zero;
+
+        distance = 0;
+
+        progress = 0;
+    } 
 
     protected int RandomAttack(int attackIndex)
     {
