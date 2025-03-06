@@ -12,17 +12,27 @@ public class Skeleton_Boss : BossMachine
     [SerializeField] public float attackCoolDown = 3f;
     private float lastAttackTime;
 
-    public float projectileSpeed;
+    [SerializeField]
+    private float projectileSpeed;
 
-    public bool jumpNow;
+    [SerializeField]
+    private bool canSpecialAttack = true;
 
-    public bool aoeNow;
+    [SerializeField]
+    private bool jumpNow = false;
 
-    public bool canThrow = true;
+    [SerializeField]
+    private bool aoeNow = false;
+
+    [SerializeField]
+    private bool canThrow = true;
 
     public GameObject projectilePrefab;
 
+    public GameObject projectileSpawn;
+
     private float projectileProgress;
+    
 
     protected void PerformAttack()
     {
@@ -57,6 +67,12 @@ public class Skeleton_Boss : BossMachine
                     MoveTowardsTarget();
                 }
 
+                if (canSpecialAttack)
+                {
+                    TriggerRangeAttack();
+                }
+
+
                 if (jumpNow)
                 {
                     CalculateDistanceBetweenObjects(rangePoint, this.gameObject);
@@ -82,12 +98,6 @@ public class Skeleton_Boss : BossMachine
                 {
                     PerformAttack();
                 }
-
-                break;
-
-            case BossState.RangedAttack:
-            
-                
 
                 break;
 
@@ -124,8 +134,13 @@ public class Skeleton_Boss : BossMachine
                 break;
 
             case BossState.RangedAttack:
+
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isIdle", true);
                 
                 StartCoroutine(JumpToPoint());
+
+                anim.SetBool("isThrowing", true);
 
                 StartCoroutine(ThrowProjectile());
 
@@ -134,7 +149,7 @@ public class Skeleton_Boss : BossMachine
             case BossState.SpecialAttack_1:
 
                 anim.SetBool("isWalking", false);
-                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdle", true);
 
                 CalculateDistanceBetweenObjects(aoePoint, this.gameObject);
 
@@ -188,6 +203,12 @@ public class Skeleton_Boss : BossMachine
     {
 
         this.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
+
+        yield return new WaitForSeconds(1.2f);
+
+        anim.SetTrigger("jumpStart");
+
+         yield return new WaitForSeconds(.5f);
         
         while (progress < 1.1f)
         {
@@ -210,6 +231,8 @@ public class Skeleton_Boss : BossMachine
             yield return null;
         }
 
+        anim.SetTrigger("jumpEnd");
+
         ResetJumpDistance();
         
     }
@@ -221,20 +244,23 @@ public class Skeleton_Boss : BossMachine
 
         jumpNow = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
 
         for (int i = 0; i < 15; i++)
         {
-            yield return new WaitForSeconds(.08f);
+
+            anim.SetTrigger("throwProjectile");
+
+            yield return new WaitForSeconds(.09f);
 
             GameObject projectile = Instantiate(projectilePrefab);
 
-            CalculateDistanceBetweenObjects(targets[0].gameObject, projectilePrefab);
+            CalculateDistanceBetweenObjects(targets[0].gameObject, projectileSpawn);
 
             while (projectileProgress < 1f)
             {
 
-                projectile.transform.position = transform.position;
+                projectile.transform.position = projectileSpawn.transform.position;
 
                 // Update progress based on speed and distance
                 projectileProgress += Time.deltaTime * projectileSpeed / distance;
@@ -262,7 +288,12 @@ public class Skeleton_Boss : BossMachine
 
         }
 
-        yield return new WaitForSeconds(2);
+        this.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
+        
+        anim.SetBool("isThrowing", false);
+        anim.SetBool("isWalking", false);
+
+        yield return new WaitForSeconds(3);
 
         ResetJumpDistance();
 
@@ -270,18 +301,60 @@ public class Skeleton_Boss : BossMachine
 
         navAgent.enabled = true;
 
+        canSpecialAttack = true;
+
         ChangeState(BossState.Walking);
 
     }
 
     private IEnumerator PerformAOEAttack()
     {
+        aoeNow = false;
+
         StartCoroutine(JumpToPoint());
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         
         anim.SetTrigger("shield_slam");
 
+        yield return new WaitForSeconds(10);
+
+        navAgent.enabled = true;
+
+        canSpecialAttack = true;
+
+        ChangeState(BossState.Walking);
+
+    }
+
+    private void TriggerRangeAttack()
+    {
+        float distanceFromAttackPoint = Vector3.Distance(rangePoint.transform.position, transform.position);
+
+        int attackProbability = UnityEngine.Random.Range(1, 4000);
+        
+        if (distanceFromAttackPoint > 15f && attackProbability == 10)
+        {
+            jumpNow = true;
+            canSpecialAttack = false;
+        }
+        else
+        {
+            TriggerAOEAttack();
+        }
+    }
+
+    private void TriggerAOEAttack()
+    {
+        float distanceFromAttackPoint = Vector3.Distance(aoePoint.transform.position, transform.position);
+
+        int attackProbability = UnityEngine.Random.Range(1, 4000);
+        
+        if (distanceFromAttackPoint > 15f && attackProbability == 10)
+        {
+            aoeNow = true;
+            canSpecialAttack = false;
+        }
     }
 
     private void ResetJumpDistance()
