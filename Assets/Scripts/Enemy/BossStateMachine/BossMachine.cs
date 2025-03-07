@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class BossMachine : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public abstract class BossMachine : MonoBehaviour
     protected BossState currentState;
 
     [SerializeField] protected List<Transform> targets = new List<Transform>();
+
+    [SerializeField] protected Slider bossHealthSlider;
 
     [SerializeField] protected string enemyName;
     [SerializeField] protected int enemyMaxHealth;
@@ -59,6 +62,11 @@ public abstract class BossMachine : MonoBehaviour
 
     protected virtual void Start()
     {
+        bossHealthSlider = GameObject.FindGameObjectWithTag("bossHealth").GetComponent<Slider>();
+
+        bossHealthSlider.maxValue = enemyMaxHealth;
+        bossHealthSlider.value = enemyMaxHealth;
+
         navAgent = GetComponent<NavMeshAgent>();
         bossController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -153,6 +161,30 @@ public abstract class BossMachine : MonoBehaviour
         navAgent.isStopped = false;
 
         ChangeState(BossState.Walking);
+    }
+
+    protected virtual void OnTriggerEnter(Collider other) 
+    {
+        Debug.Log($"Triggered with: {other.name}");
+        SpellHolder spellHolder = other.gameObject.GetComponent<SpellHolder>();
+        Debug.Log($"SpellHolder component: {spellHolder}");
+
+        if (spellHolder != null)
+        {
+            TakeDamage(spellHolder.spell);
+        }
+    }
+
+    public void TakeDamage(Spell spell)
+    {
+        bossHealthSlider.value -= spell.spellDamage;
+        Debug.Log("Enemy damaged by " + spell.spellName + " for " + spell.spellDamage + " damage.");
+
+        if (bossHealthSlider.value <= 0)
+        {
+            bossHealthSlider.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+        }
     }
     
     protected virtual void OnStateEnter(BossState state)

@@ -47,10 +47,12 @@ public class DoorManager : MonoBehaviour
         mechanismType = new bool[] {isOnlyLevers, isOnlySwitches, isBoth, isPillarOnly, isCode};
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (mechanismType[0])
         {
+            Debug.Log(levers.Length);
+
             if (CheckPullCount == levers.Length)
             {
                 door.isOpen = true;

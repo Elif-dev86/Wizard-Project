@@ -31,6 +31,8 @@ public class Skeleton_Boss : BossMachine
 
     public GameObject projectileSpawn;
 
+    [SerializeField] private ParticleSystem particleEffect;
+
     private float projectileProgress;
     
 
@@ -39,6 +41,7 @@ public class Skeleton_Boss : BossMachine
         if (Time.time >= lastAttackTime + attackCoolDown)
         {
             lastAttackTime = Time.time;
+            LockToPlayer(targets[0].transform, 100);
             StartCoroutine(AttackTime());
         }
     }
@@ -175,7 +178,7 @@ public class Skeleton_Boss : BossMachine
 
     }
 
-    private void LockToPlayer(Transform target)
+    private void LockToPlayer(Transform target, float rotSpeed)
     {
         // Calculate direction to look at the target
         Vector3 direction = target.transform.position - this.gameObject.transform.position;
@@ -277,7 +280,7 @@ public class Skeleton_Boss : BossMachine
                 // Move the object to the calculated position
                 projectile.transform.position = currentPosition;
 
-                LockToPlayer(targets[0].transform);
+                LockToPlayer(targets[0].transform, rotSpeed);
 
                 yield return null;
             }
@@ -355,6 +358,11 @@ public class Skeleton_Boss : BossMachine
             aoeNow = true;
             canSpecialAttack = false;
         }
+    }
+
+    public void PlayParticleEffect()
+    {
+        particleEffect.Play();
     }
 
     private void ResetJumpDistance()
