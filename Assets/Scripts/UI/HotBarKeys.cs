@@ -28,10 +28,13 @@ public class HotBarKeys : MonoBehaviour
 
     void OnKeyPerformed(InputAction.CallbackContext context)
     {
+
+        FindObjectOfType<HotBarKeys>();
+
         if (ConvertPathToKeyCode(context.control.ToString()) == key || ConvertPathToAlphaKeyCode(context.control.ToString()) == key)
         {
 
-            button = GetComponentInChildren<Button>();
+            button = this.GetComponentInChildren<Button>();
 
             if (button != null && isReady)
             {
@@ -66,6 +69,14 @@ public class HotBarKeys : MonoBehaviour
         }
 
         return KeyCode.None;
+    }
+
+    private void OnDestroy() 
+    {
+        if (keyAction != null)
+        {
+            keyAction.performed -= OnKeyPerformed;
+        }
     }
 
     void OnEnable()

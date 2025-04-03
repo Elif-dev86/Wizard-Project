@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 9125349959339975145}
   - component: {fileID: 8255234910617018549}
   - component: {fileID: 2374471858186462861}
+  - component: {fileID: -5291207546470679652}
   - component: {fileID: 7304807102696446413}
   m_Layer: 5
   m_Name: roseblood
@@ -244,6 +245,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 9125349959339975145}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-5291207546470679652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802195503847022116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Roseblood
+  itemDescriptionText: "Summon a single, cursed rose that blossoms and releases a
+    toxic, blood-like substance into the surrounding area. \n\nThe vile fluid spreads
+    outward, dealing continuous poison damage to enemies caught within its reach
+    as it pulses with dark energy over time."
 --- !u!114 &7304807102696446413
 MonoBehaviour:
   m_ObjectHideFlags: 0

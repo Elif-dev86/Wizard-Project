@@ -71,6 +71,14 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         canGravity = true;
     }
 
+    private void OnDestroy() 
+    {
+        if (moveAction != null)
+        {
+            moveAction = actions.FindActionMap("gameplay").FindAction("movement");
+        }
+    }
+
     void Start()
     {
         anim = GetComponentInChildren<Animator>();

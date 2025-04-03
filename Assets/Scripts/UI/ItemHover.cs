@@ -14,6 +14,7 @@ public class ItemHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public String itemName;
 
+    [TextArea(3, 20)]
     public String itemDescriptionText;
 
     Vector3 rectPos;

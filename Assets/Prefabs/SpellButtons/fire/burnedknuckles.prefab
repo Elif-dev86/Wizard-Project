@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4921543613673098134}
   - component: {fileID: 2999175492566138527}
   - component: {fileID: 9166719198631563648}
+  - component: {fileID: -6018937208650402551}
   - component: {fileID: 7372057825391970072}
   m_Layer: 5
   m_Name: burnedknuckles
@@ -108,6 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4921543613673098134}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-6018937208650402551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434499186407852596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Burned Knuckles
+  itemDescriptionText: "Summon a massive fiery hand that forms into a blazing fist
+    before crashing down onto the ground. \n\nThe impact erupts in flames, dealing
+    heavy damage to enemies caught in the fiery shockwave."
 --- !u!114 &7372057825391970072
 MonoBehaviour:
   m_ObjectHideFlags: 0

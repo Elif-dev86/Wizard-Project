@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7065829552784649701}
   - component: {fileID: 7500850425166025201}
   - component: {fileID: 7292924142132752920}
+  - component: {fileID: 8876440373149417882}
   - component: {fileID: 828112617028813006}
   m_Layer: 5
   m_Name: impalement
@@ -244,6 +245,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7065829552784649701}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &8876440373149417882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873421782098119405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Impalement
+  itemDescriptionText: "Call forth a massive, towering spike of earth that thrusts
+    upward with precision, impaling a single enemy. \n\nThe powerful strike deals
+    significant damage and temporarily immobilizes the target, leaving them pinned
+    in place by the relentless force of the earth."
 --- !u!114 &828112617028813006
 MonoBehaviour:
   m_ObjectHideFlags: 0

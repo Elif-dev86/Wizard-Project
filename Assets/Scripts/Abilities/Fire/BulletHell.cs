@@ -10,9 +10,21 @@ public class BulletHell : MonoBehaviour
 
     private Vector3 direction;
 
+    [SerializeField]
+    private GameObject core;
+
+    [SerializeField]
+    private ParticleSystem fire;
+
+    [SerializeField]
+    private ParticleSystem contact;
+
     void Start()
     {
         attackSpawn = GameObject.FindGameObjectWithTag("attackSpawn");
+
+        fire.Play();
+        contact.Stop();
 
         if (attackSpawn != null)
         {
@@ -21,7 +33,20 @@ public class BulletHell : MonoBehaviour
 
             direction.y = 0;
 
-            Destroy(this.gameObject, 3f);
+            //Destroy(this.gameObject, 3f);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other)
+        {
+            fire.Stop();
+            core.SetActive(false);
+            speed = 0;
+            contact.Play();
+            Destroy(this.gameObject, 1.2f);
+
         }
     }
 

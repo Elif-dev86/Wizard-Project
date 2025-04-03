@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 5890403696563303906}
   - component: {fileID: 864953299899363038}
   - component: {fileID: 3243185578807676670}
+  - component: {fileID: 3334111436673712069}
   - component: {fileID: 5077881532566581014}
   m_Layer: 5
   m_Name: quaternions
@@ -246,6 +247,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 5890403696563303906}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &3334111436673712069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5410535288051741325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Quaternions
+  itemDescriptionText: "Bend the laws of gravity as you launch yourself toward a
+    chosen point, soaring through the air in a fluid, curved trajectory. As you ascend,
+    you spin and twist. \n\nThe air ripples around you, distorting as you glide through
+    space in a mesmerizing, unpredictable arc."
 --- !u!114 &5077881532566581014
 MonoBehaviour:
   m_ObjectHideFlags: 0

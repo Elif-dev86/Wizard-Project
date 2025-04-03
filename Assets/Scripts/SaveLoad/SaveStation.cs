@@ -40,6 +40,7 @@ public class SaveStation : MonoBehaviour
             else if (hit.collider.CompareTag("saveStation") && canInteract)
             {
                 saveMenu.transform.gameObject.SetActive(true);
+                Time.timeScale = 0;
             }
         }
 
@@ -82,5 +83,6 @@ public class SaveStation : MonoBehaviour
     public void Resume()
     {
         saveMenu.transform.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }

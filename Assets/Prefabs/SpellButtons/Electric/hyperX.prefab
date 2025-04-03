@@ -149,9 +149,10 @@ GameObject:
   - component: {fileID: 687692969499489024}
   - component: {fileID: 9090931879508494706}
   - component: {fileID: 4311065036985010758}
+  - component: {fileID: 8673001886936792390}
   - component: {fileID: 5788962801839042270}
   m_Layer: 5
-  m_Name: hyperX
+  m_Name: hyperx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,6 +245,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 687692969499489024}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &8673001886936792390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788189241620846031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Hyper X
+  itemDescriptionText: "Channel a massive surge of energy, building up power before
+    unleashing a devastating laser beam in a targeted direction. \n\nThe concentrated
+    blast tears through enemies in its path, scorching everything with pure, unstoppable
+    force."
 --- !u!114 &5788962801839042270
 MonoBehaviour:
   m_ObjectHideFlags: 0

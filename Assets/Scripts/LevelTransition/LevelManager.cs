@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
       }
     }
 
-    private void FixedUpdate() 
+    private void LateUpdate() 
     {
       if (canFollowPath)
       {
@@ -109,13 +109,13 @@ public class LevelManager : MonoBehaviour
         {
           rotPlayer.RotateToTarget(pathPoints[0]);
 
-          player.transform.position = Vector3.MoveTowards(player.transform.transform.position, pathPoints[0].transform.position, step);
+          player.transform.position = Vector3.MoveTowards(player.transform.position, pathPoints[0].transform.position, step);
         }
         else
         {
           rotPlayer.RotateToTarget(pathPoints[1]);
 
-          player.transform.position = Vector3.MoveTowards(player.transform.transform.position, pathPoints[1].transform.position, step);
+          player.transform.position = Vector3.MoveTowards(player.transform.position, pathPoints[1].transform.position, step);
         }
 
         if (point1Distance < 1)

@@ -7116,7 +7116,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 4.05
-    functionName: PlayParticleEffect
+    functionName: PlaySlamEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

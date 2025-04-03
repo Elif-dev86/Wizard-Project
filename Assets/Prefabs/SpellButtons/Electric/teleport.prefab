@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 4132814688204752022}
   - component: {fileID: 1629469615346935501}
   - component: {fileID: 3969310020570686126}
+  - component: {fileID: -2659860258984392623}
   - component: {fileID: 986217898271182082}
   m_Layer: 5
   m_Name: teleport
@@ -242,6 +243,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4132814688204752022}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-2659860258984392623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7883684048804829664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Teleport
+  itemDescriptionText: "Vanish in a flash of energy and instantly reappear at a chosen
+    location. \n\nThis swift movement allows for quick escapes, strategic repositioning,
+    or sudden ambushes, leaving behind a brief flicker of residual energy."
 --- !u!114 &986217898271182082
 MonoBehaviour:
   m_ObjectHideFlags: 0

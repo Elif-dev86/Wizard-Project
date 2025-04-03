@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7821613390599903493}
   - component: {fileID: 3483003067699929197}
   - component: {fileID: 2623143565286893620}
+  - component: {fileID: 5740891063742590758}
   - component: {fileID: 63500986496521639}
   m_Layer: 5
-  m_Name: deathBed
+  m_Name: deathbed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,6 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7821613390599903493}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &5740891063742590758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392845273972454833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Death Bed
+  itemDescriptionText: "Unleash a devastating area-of-effect attack that engulfs
+    the ground in flames, scorching everything within a small radius. \n\nEnemies
+    caught in the inferno take continuous damage over a few seconds."
 --- !u!114 &63500986496521639
 MonoBehaviour:
   m_ObjectHideFlags: 0

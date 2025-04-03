@@ -122,9 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDescription: {fileID: 0}
   itemName: FireBall
-  itemDescriptionText: A searing orb of fire launched from your staff, scorching
-    enemies in its path. Explodes on impact, dealing area damage and igniting foes
-    for additional burn damage over time.
+  itemDescriptionText: "A searing orb of fire launched from your staff, scorching
+    enemies in its path. \n\nExplodes on impact, dealing area damage and igniting
+    foes for additional burn damage over time."
 --- !u!114 &2366034201987322834
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class FindPlayer : MonoBehaviour
     private Transform followTarget;
     private CinemachineVirtualCamera vCam;
 
-    private void Awake()
+    private void Start()
     {
         vCam = GetComponent<CinemachineVirtualCamera>();
         player = GameObject.FindGameObjectWithTag("Player");

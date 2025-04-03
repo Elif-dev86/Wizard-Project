@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1048172242046729711}
   - component: {fileID: 5172671955261166514}
   - component: {fileID: 3515460924832724618}
+  - component: {fileID: 4130890680195027459}
   - component: {fileID: 1623954172115271655}
   m_Layer: 5
   m_Name: small_potion
@@ -94,6 +95,7 @@ MonoBehaviour:
   potionName: SmallPotion
   healAmount: 5
   itemStack: 1
+  textMeshPro: {fileID: 0}
 --- !u!114 &3515460924832724618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +110,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 0}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &4130890680195027459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3180692813481554931}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Small Poiton
+  itemDescriptionText: "A quick-acting vial of healing, restoring a modest amount
+    of health when consumed. \n\nThe refreshing liquid works swiftly, easing wounds
+    and revitalizing the user, providing just enough strength to continue the fight."
 --- !u!114 &1623954172115271655
 MonoBehaviour:
   m_ObjectHideFlags: 0

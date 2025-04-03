@@ -147,9 +147,10 @@ GameObject:
   - component: {fileID: 8371478956953199447}
   - component: {fileID: 4397166021118850887}
   - component: {fileID: 329900526075231219}
+  - component: {fileID: -4269169353347047268}
   - component: {fileID: 5503765092448292656}
   m_Layer: 5
-  m_Name: thinSpark
+  m_Name: thinspark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,6 +243,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 8371478956953199447}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-4269169353347047268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779833244432118094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Thin Spark
+  itemDescriptionText: Unkown...
 --- !u!114 &5503765092448292656
 MonoBehaviour:
   m_ObjectHideFlags: 0

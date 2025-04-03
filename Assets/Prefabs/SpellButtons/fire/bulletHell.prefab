@@ -147,9 +147,10 @@ GameObject:
   - component: {fileID: 8293225627968688759}
   - component: {fileID: 6896885180880602494}
   - component: {fileID: 1689618483599113596}
+  - component: {fileID: -2735832840802223883}
   - component: {fileID: 8846087199585081315}
   m_Layer: 5
-  m_Name: bulletHell
+  m_Name: bullethell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,6 +243,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 8293225627968688759}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-2735832840802223883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814699649310217553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Bullet Hell
+  itemDescriptionText: "Launch a relentless barrage of fireballs in a wide spread,
+    overwhelming enemies with a storm of flames. \n\nEach projectile scorches anything
+    in its path and devastates foes in the targeted direction."
 --- !u!114 &8846087199585081315
 MonoBehaviour:
   m_ObjectHideFlags: 0

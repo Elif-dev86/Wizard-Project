@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6474920283958928137}
   - component: {fileID: 1564995500298338373}
   - component: {fileID: 2579862465180300261}
+  - component: {fileID: 7882067357161142225}
   m_Layer: 0
   m_Name: VirtualCamera
   m_TagString: Untagged
@@ -52,8 +53,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 517484921649597062, guid: 322a3c07ca6463a4e8c17655ab308744, type: 3}
+  m_Follow: {fileID: 517484921649597062, guid: 322a3c07ca6463a4e8c17655ab308744, type: 3}
   m_Lens:
     FieldOfView: 52
     OrthographicSize: 10
@@ -85,6 +86,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782047e2febb4c5409a052a28e30e0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7882067357161142225
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56556591951956813}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca13fb8be0683264fa1946aa143f6c88, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7253616913108987614
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 38.6, z: -28.1}
+  m_FollowOffset: {x: 0, y: 38.72, z: -30.4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

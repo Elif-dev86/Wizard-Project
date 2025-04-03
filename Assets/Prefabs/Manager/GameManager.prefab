@@ -44,23 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f275103ce970d84ca9bc02aa4eed875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSlider: {fileID: 0}
+  hotBar: {fileID: 0}
   inventory: {fileID: 0}
   inventoryItemData:
-  - deathBed
-  - bulletHell
+  - deathbed
+  - bullethell
   - gaimagma
   - burnedknuckles
-  - small_potion
-  - thinSpark
-  - teleport
-  - spark
-  - thunderclap
-  - hyperX
-  - rottenspit
-  - cumulostinkus
-  - stingray
-  - heartthorns
-  - roseblood
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -82,11 +84,11 @@ MonoBehaviour:
   - 
   - 
   - fireball
-  - impalement
-  - thousandniddles
-  - meteorstrike
-  - quaternions
-  - twister
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   potionStackIndex: 00000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

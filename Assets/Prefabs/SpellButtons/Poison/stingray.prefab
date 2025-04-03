@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1496903995479763525}
   - component: {fileID: 791708483918592907}
   - component: {fileID: 4742608636668544528}
+  - component: {fileID: -2905055469150675265}
   - component: {fileID: 1653575875702153737}
   m_Layer: 5
   m_Name: stingray
@@ -108,6 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1496903995479763525}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-2905055469150675265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891962480512774030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Sting Ray
+  itemDescriptionText: "Unleash a swift, venomous strike as a barbed tail materializes
+    from the shadows, lashing out in a rapid motion. \n\nThe poisoned tip pierces
+    enemies, inflicting damage and leaving them vulnerable to lingering toxin effects."
 --- !u!114 &1653575875702153737
 MonoBehaviour:
   m_ObjectHideFlags: 0

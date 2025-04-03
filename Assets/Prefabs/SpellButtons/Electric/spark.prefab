@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4649186770931227288}
   - component: {fileID: 2461026792139212607}
   - component: {fileID: 8724826373345116988}
+  - component: {fileID: -729847913561522114}
   - component: {fileID: 6817122571305478287}
   m_Layer: 5
   m_Name: spark
@@ -108,6 +109,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4649186770931227288}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-729847913561522114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535299748594169245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Spark
+  itemDescriptionText: " Unleash a sudden burst of electricity that arcs through
+    the air, striking nearby enemies with a jolt of energy. \n\nThe crackling discharge
+    stuns and damages foes caught in its path, leaving them momentarily paralyzed
+    by the surge."
 --- !u!114 &6817122571305478287
 MonoBehaviour:
   m_ObjectHideFlags: 0

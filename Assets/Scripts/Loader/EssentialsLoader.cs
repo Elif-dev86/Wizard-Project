@@ -6,6 +6,7 @@ public class EssentialsLoader : MonoBehaviour
 {
     public GameObject playerUI;
     public GameObject gameMan;
+    public GameObject Player;
 
     void Awake()
     {
@@ -17,6 +18,11 @@ public class EssentialsLoader : MonoBehaviour
         if (InventoryManagement.instance == null)
         {
             Instantiate(playerUI);
+        }
+        
+        if (PlayerMovement.instance == null)
+        {
+            Instantiate(Player);
         }
     }
 

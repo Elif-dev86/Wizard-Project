@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4478271024967374677}
   - component: {fileID: 4760015728097221011}
   - component: {fileID: 5239888332710876305}
+  - component: {fileID: 8488598027147151651}
   - component: {fileID: 1765840324368046505}
   m_Layer: 5
   m_Name: thousandniddles
@@ -246,6 +247,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4478271024967374677}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &8488598027147151651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051909124802893979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Thousand Needles
+  itemDescriptionText: "Erupt from the earth as a flood of sharp, piercing needles,
+    bursting from the ground to impale enemies in a wide radius. \n\nThe relentless
+    surge of spikes damages and traps foes, forcing them to endure the agony as they
+    struggle against the deadly barrage."
 --- !u!114 &1765840324368046505
 MonoBehaviour:
   m_ObjectHideFlags: 0

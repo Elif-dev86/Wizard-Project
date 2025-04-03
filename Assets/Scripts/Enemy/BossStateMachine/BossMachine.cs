@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public abstract class BossMachine : MonoBehaviour
 {
     public enum BossState
     {
+        StandBy,
         BattleStart,
         Idle,
         Walking,
@@ -15,6 +17,7 @@ public abstract class BossMachine : MonoBehaviour
         RangedAttack,
         SpecialAttack_1,
         SpecialAttack_2,
+        DeadState
     }
 
     protected NavMeshAgent navAgent;
@@ -27,7 +30,7 @@ public abstract class BossMachine : MonoBehaviour
 
     [SerializeField] protected List<Transform> targets = new List<Transform>();
 
-    [SerializeField] protected Slider bossHealthSlider;
+    [SerializeField] public Slider bossHealthSlider;
 
     [SerializeField] protected string enemyName;
     [SerializeField] protected int enemyMaxHealth;
@@ -60,9 +63,14 @@ public abstract class BossMachine : MonoBehaviour
 
     Transform target;
 
+    [SerializeField]
+    Animator camAnim;
+
     protected virtual void Start()
     {
         bossHealthSlider = GameObject.FindGameObjectWithTag("bossHealth").GetComponent<Slider>();
+
+        bossHealthSlider.gameObject.SetActive(false);
 
         bossHealthSlider.maxValue = enemyMaxHealth;
         bossHealthSlider.value = enemyMaxHealth;
@@ -80,7 +88,7 @@ public abstract class BossMachine : MonoBehaviour
         navAgent.speed = moveSpeed;
         navAgent.stoppingDistance = stopDistance;
 
-        StartCoroutine(BattleInitializer());
+        ChangeState(BossState.StandBy);
     }
 
     protected virtual void Update()
@@ -93,6 +101,10 @@ public abstract class BossMachine : MonoBehaviour
 
         switch (currentState)
         {
+
+            case BossState.StandBy:
+            
+                break;
 
             case BossState.BattleStart:
 
@@ -122,6 +134,10 @@ public abstract class BossMachine : MonoBehaviour
 
                 break;
 
+            case BossState.DeadState:
+
+                break;
+
         }
     }
 
@@ -144,7 +160,7 @@ public abstract class BossMachine : MonoBehaviour
     }
 
     
-    protected IEnumerator BattleInitializer()
+    protected virtual IEnumerator BattleInitializer()
     {
         Debug.Log("Starting battle");
 
@@ -182,8 +198,9 @@ public abstract class BossMachine : MonoBehaviour
 
         if (bossHealthSlider.value <= 0)
         {
-            bossHealthSlider.gameObject.SetActive(false);
-            Destroy(this.gameObject);
+            StopAllCoroutines();
+            ChangeState(BossState.DeadState);
+            StartCoroutine(DeathTrigger());
         }
     }
     
@@ -207,5 +224,27 @@ public abstract class BossMachine : MonoBehaviour
                 // For example, play an attacking animation or sound
                 break;
         }
+    }
+    
+    private IEnumerator DeathTrigger()
+    {
+        bossHealthSlider.gameObject.SetActive(false);
+
+        this.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
+
+        anim.SetBool("isThrowing", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isIdle", false);
+        anim.SetTrigger("deathTrigger");
+
+        navAgent.enabled = false;
+        
+        yield return new WaitForSeconds(7f);
+        
+        camAnim.SetBool("zoomOut", false);
+        
+        yield return new WaitForSeconds(.8f);
+
+        Destroy(this.gameObject);
     }
 }

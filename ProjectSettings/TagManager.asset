@@ -32,6 +32,7 @@ TagManager:
   - hotBarSlot
   - itemDescription
   - bossHealth
+  - pauseMenu
   layers:
   - Default
   - TransparentFX
@@ -45,7 +46,7 @@ TagManager:
   - Pointer
   - Agro
   - Wall
-  - 
+  - BulletHell
   - 
   - 
   - 

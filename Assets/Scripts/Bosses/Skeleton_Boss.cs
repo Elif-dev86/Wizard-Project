@@ -31,7 +31,7 @@ public class Skeleton_Boss : BossMachine
 
     public GameObject projectileSpawn;
 
-    [SerializeField] private ParticleSystem particleEffect;
+    [SerializeField] private ParticleSystem[] particleEffect;
 
     private float projectileProgress;
     
@@ -54,10 +54,6 @@ public class Skeleton_Boss : BossMachine
 
         switch (currentState)
         {
-
-            case BossState.Idle:
-                Debug.Log("I'm here");
-                break;
 
             case BossState.Walking:
 
@@ -111,6 +107,12 @@ public class Skeleton_Boss : BossMachine
     {
         switch (state)
         {
+
+            case BossState.StandBy:
+
+                
+
+                break;
 
             case BossState.Idle:
                 // Do something when entering idle state
@@ -360,9 +362,14 @@ public class Skeleton_Boss : BossMachine
         }
     }
 
-    public void PlayParticleEffect()
+    public void PlaySlamEffect()
     {
-        particleEffect.Play();
+        particleEffect[0].Play();
+    }
+
+    public void PlayDeadEffect()
+    {
+        particleEffect[1].Play();
     }
 
     private void ResetJumpDistance()
@@ -379,5 +386,10 @@ public class Skeleton_Boss : BossMachine
     protected int RandomAttack(int attackIndex)
     {
         return UnityEngine.Random.Range(0, attackIndex);
+    }
+
+    public void ActivateBattle()
+    {
+        StartCoroutine(BattleInitializer());
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3508681262112662139}
   - component: {fileID: 6047954960400933897}
   - component: {fileID: 211983034995503085}
+  - component: {fileID: -7995829134778444975}
   - component: {fileID: 6750736616100604607}
   m_Layer: 5
   m_Name: thunderclap
@@ -108,6 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 3508681262112662139}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &-7995829134778444975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752784027521968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20444f1298e04a94786174b95a455d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDescription: {fileID: 0}
+  itemName: Thunderclap
+  itemDescriptionText: "Release a powerful shockwave of electricity with a deafening
+    crack, striking all enemies in close range. \n\nThe burst of energy deals heavy
+    damage and briefly stuns foes, leaving them reeling from the thunderous impact."
 --- !u!114 &6750736616100604607
 MonoBehaviour:
   m_ObjectHideFlags: 0
