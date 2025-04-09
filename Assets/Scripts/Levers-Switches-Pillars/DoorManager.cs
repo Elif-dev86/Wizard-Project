@@ -51,7 +51,7 @@ public class DoorManager : MonoBehaviour
     {
         if (mechanismType[0])
         {
-            Debug.Log(levers.Length);
+            //Debug.Log(levers.Length);
 
             if (CheckPullCount == levers.Length)
             {

@@ -39,7 +39,7 @@ public class InventoryManagement : MonoBehaviour
         avalibeSlots = new int[inventorySlots.Length];
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (canSelectTarget != true)
         {
@@ -47,7 +47,7 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         CheckSlots();
     }
@@ -200,15 +200,15 @@ public class InventoryManagement : MonoBehaviour
 
                 if (objectSelected == "door" && child.CompareTag("key"))
                 {
-                    DoorManager isKeyCheck = GameObject.FindObjectOfType<DoorManager>();
+                    DoorManager doorManager = hit.collider.GetComponent<DoorManager>();
 
-                    if (isKeyCheck.isKeyOnly == true)
+                    Debug.Log(doorManager);
+
+                    if (doorManager.isKeyOnly == true)
                     {
                         hit.collider.GetComponent<BoxCollider>().enabled = false;
-
-                        Door doorManager = GameObject.FindObjectOfType<Door>();
-
-                        doorManager.isOpen = true;
+                        
+                        doorManager.door.isOpen = true;
 
                         TextMeshProUGUI textMeshPro = child.GetComponentInChildren<TextMeshProUGUI>();
 

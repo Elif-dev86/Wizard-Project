@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (canMove == true)
         {
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         moveDirection = new Vector3(moveVector.x, 0, moveVector.z);
 
         // Check if the movement vector's magnitude is greater than or equal to 0.1
-        if (moveVector.magnitude >= 0.1f)
+        if (moveVector.magnitude >= 0.1f && controller.isGrounded)
         {
             // Store the x and z components of the move vector
             lastDirectionX = moveVector.x;
@@ -144,12 +144,16 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
 
         }
         
-        // Apply gravity to the y-velocity
-        velocityY += Time.deltaTime * gravity;
 
-        if (canGravity)
+        if (!controller.isGrounded)
         {
-            controller.Move(Vector3.up * velocityY);
+            // Apply gravity to the y-velocity
+            //velocityY += Time.deltaTime * gravity;
+            
+            if (canGravity)
+            {
+                controller.Move(Vector3.up * gravity * Time.deltaTime);
+            }
         }
     }
 
