@@ -2445,7 +2445,7 @@ MonoBehaviour:
   stopDistance: 4.3
   gravity: -12
   viewRadius: 25
-  viewAngle: 180
+  viewAngle: 185
   targetMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -2465,7 +2465,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120

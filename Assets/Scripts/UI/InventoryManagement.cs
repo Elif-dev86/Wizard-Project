@@ -39,7 +39,7 @@ public class InventoryManagement : MonoBehaviour
         avalibeSlots = new int[inventorySlots.Length];
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (canSelectTarget != true)
         {
@@ -47,7 +47,7 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         CheckSlots();
     }
@@ -104,19 +104,17 @@ public class InventoryManagement : MonoBehaviour
                 {
                     GameObject lever = hit.collider.gameObject;
 
-                    DoorManager doorManager = FindObjectOfType<DoorManager>();
-
                     if (!lever.GetComponent<LeverPullCheck>().isPulled == true)
                     {
                         lever.GetComponent<LeverPullCheck>().isPulled = true;
 
-                        doorManager.CheckPullCount += 1;
+                        lever.GetComponent<LeverPullCheck>().door.CheckPullCount += 1;
                     }
                     else
                     {
                         lever.GetComponent<LeverPullCheck>().isPulled = false;
 
-                        doorManager.CheckPullCount -= 1;
+                        lever.GetComponent<LeverPullCheck>().door.CheckPullCount -= 1;
                     }
                     
                 }

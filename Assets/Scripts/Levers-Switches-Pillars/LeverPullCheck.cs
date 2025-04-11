@@ -8,6 +8,8 @@ public class LeverPullCheck : MonoBehaviour
 
     public bool isPulled;
 
+    public DoorManager door;
+
     private void Start() 
     {
         anim = GetComponent<Animator>();

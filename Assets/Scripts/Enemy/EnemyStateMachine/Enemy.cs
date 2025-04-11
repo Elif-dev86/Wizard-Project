@@ -102,6 +102,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
                 else
                 {
                     MoveTowardsTarget();
+                    CheckForTargetDistance();
                 }
                 
                 break;
@@ -159,6 +160,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         visibleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
+        
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
 
@@ -168,16 +170,25 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
             {
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
 
+                Debug.Log(Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask));
+
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
+
+                    ChangeState(EnemyState.Chasing);
                 }
                 
+            }
+            else
+            {
+                Debug.Log("Is there but I can't see it");
+                ChangeState(EnemyState.Idle);
             }
         }
         
         // Check if there are valid targets in view
-        bool hasValidTarget = false;
+        /*bool hasValidTarget = false;
 
         foreach (Collider targetCollider in targetsInViewRadius)
         {
@@ -196,7 +207,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
         else
         {
             ChangeState(EnemyState.Idle);
-        }
+        }*/
         
     }
 
@@ -213,6 +224,14 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected void MoveTowardsTarget()
     {
+        if (visibleTargets.Count > 0)
+        {
+            FindTarget();
+        }
+    }
+
+    protected void FindTarget()
+    {
         // Calculate the direction towards the target
         Vector3 direction = (visibleTargets[visibleTargets.Count - 1].position - transform.position).normalized;
 
@@ -221,8 +240,25 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
         // Move the enemy towards the target
         navAgent.SetDestination(visibleTargets[visibleTargets.Count -1].position);
+    }
 
-        //RotateToTarget(target);
+    public virtual void CheckForTargetDistance()
+    {
+
+        Vector3 currentPosition = this.transform.position; // Current position of the object
+        Vector3 targetPosition = navAgent.destination;     // Target position the NavMeshAgent is heading towards
+
+        float distanceToTravel = Vector3.Distance(currentPosition, targetPosition);
+
+        //Debug.Log(Mathf.Round(distanceToTravel));
+
+        if (distanceToTravel > 1)
+        {
+            if (distanceToTravel < 4.4)
+            {
+                ChangeState(EnemyState.Idle);
+            }
+        }
     }
 
     protected virtual void OnTriggerEnter(Collider other) 
@@ -241,6 +277,12 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
     {
         enemyHealthCanvas.value -= spell.spellDamage;
         Debug.Log("Enemy damaged by " + spell.spellName + " for " + spell.spellDamage + " damage.");
+
+        visibleTargets.Add(FindObjectOfType<PlayerMovement>().transform);
+
+        FindTarget();
+
+        ChangeState(EnemyState.Chasing);
 
         if (enemyHealthCanvas.value <= 0)
         {

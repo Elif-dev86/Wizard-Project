@@ -24,7 +24,7 @@ public class Skeleton : Enemy
             case EnemyState.Idle:
                 // Do something when entering idle state
                 navAgent.isStopped = true;
-                viewAngle = 180;
+                //viewAngle = 180;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isIdle", true);
                 break;
@@ -32,7 +32,7 @@ public class Skeleton : Enemy
             case EnemyState.Chasing:
                 // For example, play a chasing animation or sound
                 navAgent.isStopped = false;
-                viewAngle = 360;
+                //viewAngle = 360;
                 anim.SetBool("isWalking", true);
                 Debug.Log("Entering Chasing state");
                 break;

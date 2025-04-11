@@ -54,7 +54,7 @@ public class HotbarManagement : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         FindButtons();
 
@@ -74,7 +74,6 @@ public class HotbarManagement : MonoBehaviour
         {
             pMovement = FindObjectOfType<PlayerMovement>();
         }
-        
     }
 
     private void FindButtons()
