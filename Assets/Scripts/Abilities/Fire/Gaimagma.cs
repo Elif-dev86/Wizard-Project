@@ -13,9 +13,9 @@ public class Gaimagma : MonoBehaviour
 
         Vector3 targetPosition = target.transform.position;
 
-        targetPosition.y = 0.1f;
-
         this.transform.position = targetPosition;
+
+        targetPosition.y = 0.1f;
 
         Destroy(this.gameObject, 10);
     }

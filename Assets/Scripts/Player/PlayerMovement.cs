@@ -210,6 +210,12 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     {
         healtBar.value -= enemyAttack.enemyDamage;
         //Debug.Log("Player damaged by " + enemyAttack.enemyName + " for " + enemyAttack.enemyDamage + " damage.");
+
+        if (healtBar.value == 0)
+        {
+            this.enabled = false;
+            this.transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     public IEnumerator AttackTime()

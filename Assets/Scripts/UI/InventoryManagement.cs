@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class InventoryManagement : MonoBehaviour
 {
+    private GameManager manager;
+
     public static InventoryManagement instance;
 
     public HotbarManagement hotbarManagement;
@@ -36,6 +38,7 @@ public class InventoryManagement : MonoBehaviour
 
     private void Start()
     {
+        manager = GameObject.FindObjectOfType<GameManager>();
         avalibeSlots = new int[inventorySlots.Length];
     }
 
@@ -122,12 +125,16 @@ public class InventoryManagement : MonoBehaviour
                 if (hit.collider.CompareTag("normalChest"))
                 {
                     GameObject chest = hit.collider.gameObject;
+                    int chestID = chest.GetComponent<Chest>().chestID;
 
                     if (!chest.GetComponent<Chest>().isOpen)
                     {
                         chest.GetComponent<Chest>().OpenChest();
                         chest.GetComponent<Chest>().isOpen = true;
                     }
+
+                    manager.objectStates.Add(chestID, chest.GetComponent<Chest>().isOpen = true);
+                    SaveOutput.SavePlayer(manager);
                 }
             }
         }

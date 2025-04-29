@@ -33,6 +33,7 @@ TagManager:
   - itemDescription
   - bossHealth
   - pauseMenu
+  - playerSpawn
   layers:
   - Default
   - TransparentFX

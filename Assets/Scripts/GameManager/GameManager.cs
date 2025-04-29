@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using System.Numerics;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,24 +21,68 @@ public class GameManager : MonoBehaviour
 
     public InventoryManagement inventory;
 
+    public InputActionAsset actions;
+
+    [HideInInspector]
+    public InputAction pause;
+
+    public GameObject pauseMenu;
+
+    public GameObject gameOverScreen;
+
+    public bool canPause = true;
+
+    public bool isPaused = false;
+
+    private bool waitForReset = false;
+
     public string[] inventoryItemData;
     
     public int[] potionStackIndex;
+
+    private Animator gameOverScreenAnim;
+
+    [SerializeField]
+    public Dictionary<int, bool> objectStates = new Dictionary<int, bool>();
 
     void Awake()
     {
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        
     }
 
     private void Start() 
     {
+        CheckForPlayerInstance();
         
+        pause = actions.FindActionMap("Gameplay").FindAction("pause");
+        pause.performed += PauseGame;
 
-        //CheckForPlayerInstance();
+        pauseMenu.SetActive(false);
+
+        gameOverScreenAnim = gameOverScreen.GetComponent<Animator>();
+        gameOverScreen.SetActive(false);
+
+        UpdateObjectStates();
 
         LoadInventory();
+    }
+
+    private void LateUpdate()
+    {
+        if (playerSlider.value == 0)
+        {
+            gameOverScreen.SetActive(true);
+            gameOverScreenAnim.SetTrigger("gameOverTrigger");
+
+            if (!waitForReset)
+            {
+                StartCoroutine(WaitToResetLevelAfterDeath());
+            }
+        }
     }
 
     public void NewGame()
@@ -48,8 +94,8 @@ public class GameManager : MonoBehaviour
             inventoryItemData = new string[43];
             potionStackIndex = new int[43];
             inventoryItemData[35] = "fireball";
-
-            StartCoroutine(WaitBitch());
+        
+            StartCoroutine(ReloadInventory());
             
         }
     }
@@ -62,12 +108,12 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().isLoaded)
         {
 
-            StartCoroutine(WaitBitch());
+            StartCoroutine(ReloadInventory());
             
         }
     }
 
-    public void QuitGame()
+    public void QuitGameMain()
     {
         Application.Quit();
     }
@@ -76,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         playerSlider = GameObject.FindGameObjectWithTag("playerHealth").GetComponent<Slider>();
         hotBar = GameObject.FindGameObjectWithTag("HotbarSlot").GetComponent<HotbarManagement>();
-        inventory = GameObject.FindGameObjectWithTag("inventorySlot").GetComponent<InventoryManagement>();
+        inventory = GameObject.FindGameObjectWithTag("InventorySlot").GetComponent<InventoryManagement>();
     }
 
     public void LoadInventory()
@@ -91,8 +137,8 @@ public class GameManager : MonoBehaviour
         {
             Transform slot = inventory.inventorySlots[i].transform;
             
-            //inventoryItemData[i] = data.items[i];
-            //potionStackIndex[i] = data.itemStackIndex[i];
+            inventoryItemData[i] = data.items[i];
+            potionStackIndex[i] = data.itemStackIndex[i];
 
             inventory.AddAttackToInventory(slot, inventoryItemData[i]);
 
@@ -115,7 +161,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator WaitBitch()
+    IEnumerator ReloadInventory()
     {
         yield return new WaitForSeconds(1);
 
@@ -129,5 +175,156 @@ public class GameManager : MonoBehaviour
         }
 
         
+    }
+
+    IEnumerator WaitToResetLevelAfterDeath()
+    {
+        canPause = false;
+        waitForReset = true;
+        player.enabled = false;
+
+        SaveGame();
+
+        yield return new WaitForSeconds(7);
+
+        Destroy(player.gameObject);
+
+        playerSlider.value = 100;
+        
+        SceneManager.LoadScene("test_dungeon_1F");
+
+        if (SceneManager.GetActiveScene().isLoaded)
+        {
+            CheckForPlayerInstance();
+
+
+            for (int i = 0; i < inventory.inventorySlots.Length; i++)
+            {
+                Transform slot = inventory.inventorySlots[i].transform;
+
+
+                if(slot.childCount > 0)
+                {
+                    GameObject child = slot.GetChild(0).gameObject;
+                    Destroy(child);
+                }
+            }
+        }
+
+        waitForReset = false;
+        gameOverScreen.SetActive(false);
+        
+        yield return new WaitForSeconds(1);
+
+        if (player == null)
+        {
+            player = GameManager.FindObjectOfType<PlayerMovement>();
+        }
+
+        UpdateObjectStates();
+
+        player.enabled = false;
+
+        canPause = true;
+        
+        player.enabled = true;
+    }
+
+    void PauseGame(InputAction.CallbackContext ctx)
+    {
+        if (canPause)
+        {
+            if (ctx.performed)
+            {
+                isPaused = !isPaused;
+            }
+
+            if (isPaused)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void SaveGame()
+    {
+        GameManager manager = GameObject.FindObjectOfType<GameManager>();
+
+        for (int i = 0; i < inventory.inventorySlots.Length; i++)
+        {
+            Transform slot = inventory.inventorySlots[i].transform;
+
+            if (slot.childCount > 0)
+            {
+                GameObject child = slot.GetChild(0).gameObject;
+
+                manager.inventoryItemData[i] = child.name;
+
+                //Debug.Log(child.name);
+
+                if (child.CompareTag("potion"))
+                {
+                    int potionStackCount = child.GetComponent<PotionManager>().itemStack;
+
+                    manager.potionStackIndex[i] = potionStackCount;
+                }
+            }
+            else
+            {
+                manager.inventoryItemData[i] = "";
+            }
+        }
+
+        //player.SavePlayer();
+        
+        Debug.Log("GameSaved");
+        SaveOutput.SavePlayer(manager);
+    }
+
+    void UpdateObjectStates()
+    {
+        GameObject[] objectsInScene = GameObject.FindGameObjectsWithTag("normalChest");
+
+        PlayerData data = SaveOutput.LoadPlayer();
+
+        objectStates = data.objectStates;
+
+        for (int i = 0; i < objectsInScene.Length; i++)
+        {
+
+            if (objectsInScene[i].GetComponent<Chest>().isOpen)
+            {
+                int objectInSceneID = objectsInScene[i].GetComponent<Chest>().chestID;
+                
+                foreach (var obj in objectStates)
+                {
+
+                    if (objectInSceneID == obj.Key)
+                    {
+                        objectsInScene[i].GetComponent<Chest>().isOpen = true;
+                        objectsInScene[i].GetComponent<Chest>().ChestIsOpened();
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    public void QuitGamePause()
+    {
+        Application.Quit();
     }
 }

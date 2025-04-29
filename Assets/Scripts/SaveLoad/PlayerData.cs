@@ -13,6 +13,8 @@ public class PlayerData
     public int[] itemStackIndex;
     public float[] position;
 
+    public Dictionary<int, bool> objectStates = new Dictionary<int, bool>();
+
     public PlayerData (GameManager manager)
     {
         //health = player.healtBar.value;
@@ -20,6 +22,8 @@ public class PlayerData
         items = manager.inventoryItemData;
         
         itemStackIndex = manager.potionStackIndex;
+
+        objectStates = manager.objectStates;
 
         //position = new float[3];
         //position[0] = player.transform.position.x;

@@ -8,10 +8,12 @@ public class Chest : MonoBehaviour
 
     public GameObject[] itemSlots;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool isOpen;
 
     public bool isRandomItems, isSelectedItem;
+    
+    public int chestID;
 
     private bool[] chestType;
 
@@ -25,6 +27,8 @@ public class Chest : MonoBehaviour
         chestCollider = GetComponent<BoxCollider>();
 
         chestType = new bool[] {isRandomItems, isSelectedItem};
+
+        ChestIsOpened();
     }
 
     public void OpenChest()
@@ -70,6 +74,15 @@ public class Chest : MonoBehaviour
             return;
         }
 
+    }
+
+    public void ChestIsOpened()
+    {
+        if (isOpen)
+        {
+            anim.SetTrigger("openChest");
+            chestCollider.enabled = false;
+        }
     }
 
     int SetRandomItems()
