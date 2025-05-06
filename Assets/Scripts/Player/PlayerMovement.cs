@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
         controller = GetComponent<CharacterController>();
         dialogueManager = FindObjectOfType<DialogueManager>();
 
-        inventory = GameObject.FindGameObjectWithTag("InventorySlot");
+        inventory = GameObject.FindGameObjectWithTag("inventory");
         sliderObj = GameObject.FindGameObjectWithTag("playerHealth");
         healtBar = sliderObj.GetComponent<Slider>();
 
@@ -233,6 +233,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerDamageable
     {
 
         //inventory = GameObject.FindGameObjectWithTag("InventorySlot");
+        if (inventoryTransform == null) return;
+        if (!inventoryTransform) return; // catches destroyed GameObjects
         inventoryTransform = inventory.transform;
 
         if (context.performed)

@@ -13,11 +13,8 @@ public class NormalDoor : Door
         anim = GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        if (isOpen != false)
-        {
-            anim.SetBool("isOpen", true);
-        }   
+        anim.SetBool("isOpen", isOpen); 
     }
 }

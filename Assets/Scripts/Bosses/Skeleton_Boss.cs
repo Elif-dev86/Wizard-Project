@@ -48,58 +48,60 @@ public class Skeleton_Boss : BossMachine
 
     protected override void UpdateState()
     {
-        float targetDistance = Vector3.Distance(transform.position, targets[0].transform.position);
-
-        targetDistance = (int) targetDistance;
-
-        switch (currentState)
+        if (targets.Count > 0)
         {
+            float targetDistance = Vector3.Distance(transform.position, targets[0].transform.position);
+            targetDistance = (int) targetDistance;
 
-            case BossState.Walking:
+            switch (currentState)
+            {
 
-                if (targetDistance <= stopDistance)
-                {
-                    ChangeState(BossState.MeleeAttack);
-                }
-                else
-                {
-                    MoveTowardsTarget();
-                }
+                case BossState.Walking:
 
-                if (canSpecialAttack)
-                {
-                    TriggerRangeAttack();
-                }
+                    if (targetDistance <= stopDistance)
+                    {
+                        ChangeState(BossState.MeleeAttack);
+                    }
+                    else
+                    {
+                        MoveTowardsTarget();
+                    }
+
+                    if (canSpecialAttack)
+                    {
+                        TriggerRangeAttack();
+                    }
 
 
-                if (jumpNow)
-                {
-                    CalculateDistanceBetweenObjects(rangePoint, this.gameObject);
+                    if (jumpNow)
+                    {
+                        CalculateDistanceBetweenObjects(rangePoint, this.gameObject);
 
-                    ChangeState(BossState.RangedAttack);
-                }
+                        ChangeState(BossState.RangedAttack);
+                    }
 
-                if (aoeNow)
-                {
-                    ChangeState(BossState.SpecialAttack_1);
-                }
-                
-                break;
+                    if (aoeNow)
+                    {
+                        ChangeState(BossState.SpecialAttack_1);
+                    }
+                    
+                    break;
 
-            case BossState.MeleeAttack:
+                case BossState.MeleeAttack:
 
-                Debug.Log("is attacking");
-                if (targetDistance > stopDistance)
-                {
-                    ChangeState(BossState.Walking);
-                }
-                else
-                {
-                    PerformAttack();
-                }
+                    Debug.Log("is attacking");
+                    if (targetDistance > stopDistance)
+                    {
+                        ChangeState(BossState.Walking);
+                    }
+                    else
+                    {
+                        PerformAttack();
+                    }
 
-                break;
+                    break;
 
+            }
         }
     }
 

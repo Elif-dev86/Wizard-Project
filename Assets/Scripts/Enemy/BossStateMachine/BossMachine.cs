@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public abstract class BossMachine : MonoBehaviour
 {
@@ -61,10 +62,11 @@ public abstract class BossMachine : MonoBehaviour
 
     protected Vector3 endPoint;
 
-    Transform target;
+    protected Transform target;
 
     [SerializeField]
     Animator camAnim;
+    protected bool isReadyToLoad = false;
 
     protected virtual void Start()
     {
@@ -88,12 +90,19 @@ public abstract class BossMachine : MonoBehaviour
         navAgent.speed = moveSpeed;
         navAgent.stoppingDistance = stopDistance;
 
+        isReadyToLoad = false;
+
         ChangeState(BossState.StandBy);
     }
 
-    protected virtual void Update()
+    protected virtual void LateUpdate()
     {
         UpdateState();
+
+        if (isReadyToLoad)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     protected virtual void UpdateState()
@@ -242,9 +251,31 @@ public abstract class BossMachine : MonoBehaviour
         yield return new WaitForSeconds(7f);
         
         camAnim.SetBool("zoomOut", false);
-        
-        yield return new WaitForSeconds(.8f);
 
-        Destroy(this.gameObject);
+        targets.Clear();
+
+        yield return new WaitForSeconds(3);
+
+        GameManager manager = FindObjectOfType<GameManager>();
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        GameObject playerUI = GameObject.FindGameObjectWithTag("playerUI");
+
+        SceneManager.MoveGameObjectToScene(manager.gameObject, SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(playerUI, SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(player.gameObject, SceneManager.GetActiveScene());
+
+        yield return new WaitForSeconds(1);
+        
+        Destroy(manager.gameObject);
+        Destroy(playerUI);
+        Destroy(player.gameObject);
+
+        // Optionally null out static singletons
+        InventoryManagement.instance = null;
+        GameManager.instance = null;
+
+        yield return new WaitForSeconds(1);
+
+        isReadyToLoad = true;
     }
 }

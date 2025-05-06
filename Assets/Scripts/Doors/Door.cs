@@ -29,8 +29,6 @@ public class Door : MonoBehaviour
         clickAction.performed += CheckForKey;
 
         iManagement = GameObject.FindObjectOfType<InventoryManagement>();
-
-        isOpen = false;
     }
 
     protected virtual void CheckForKey(InputAction.CallbackContext context)

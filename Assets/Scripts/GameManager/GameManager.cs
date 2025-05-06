@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private Animator gameOverScreenAnim;
 
     [SerializeField]
-    public Dictionary<int, bool> objectStates = new Dictionary<int, bool>();
+    public Dictionary<string, bool> objectStates = new Dictionary<string, bool>();
 
     void Awake()
     {
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
+
         CheckForPlayerInstance();
         
         pause = actions.FindActionMap("Gameplay").FindAction("pause");
@@ -68,32 +69,40 @@ public class GameManager : MonoBehaviour
 
         UpdateObjectStates();
 
-        LoadInventory();
+        Scene firstScene = SceneManager.GetSceneByBuildIndex(1);
+
+        if (firstScene.isLoaded && SceneManager.GetActiveScene() != firstScene)
+        {
+            SceneManager.UnloadSceneAsync("test_dungeon_1F");
+            SceneManager.UnloadSceneAsync("test_dungeon_2F");
+        }
+
+        //LoadInventory();
     }
 
     private void LateUpdate()
     {
-        if (playerSlider.value == 0)
+        if (playerSlider && playerSlider.value == 0)
         {
             gameOverScreen.SetActive(true);
-            gameOverScreenAnim.SetTrigger("gameOverTrigger");
-
             if (!waitForReset)
             {
+                gameOverScreenAnim.SetTrigger("gameOverTrigger");
                 StartCoroutine(WaitToResetLevelAfterDeath());
             }
         }
+        
     }
 
     public void NewGame()
     {
-        SceneManager.LoadScene("test_game");
+        SceneManager.LoadScene("test_dungeon_1F");
 
         if (SceneManager.GetActiveScene().isLoaded)
         {
-            inventoryItemData = new string[43];
-            potionStackIndex = new int[43];
-            inventoryItemData[35] = "fireball";
+            inventoryItemData = new string[48];
+            potionStackIndex = new int[48];
+            inventoryItemData[40] = "fireball";
         
             StartCoroutine(ReloadInventory());
             
@@ -103,7 +112,7 @@ public class GameManager : MonoBehaviour
     public void ContinueGame()
     {
 
-        SceneManager.LoadScene("test_game");
+        SceneManager.LoadScene("test_dungeon_1F");
 
         if (SceneManager.GetActiveScene().isLoaded)
         {
@@ -120,9 +129,12 @@ public class GameManager : MonoBehaviour
 
     public void CheckForPlayerInstance()
     {
-        playerSlider = GameObject.FindGameObjectWithTag("playerHealth").GetComponent<Slider>();
-        hotBar = GameObject.FindGameObjectWithTag("HotbarSlot").GetComponent<HotbarManagement>();
-        inventory = GameObject.FindGameObjectWithTag("InventorySlot").GetComponent<InventoryManagement>();
+        if (GameObject.FindObjectOfType<PlayerMovement>())
+        {
+            playerSlider = GameObject.FindGameObjectWithTag("playerHealth").GetComponent<Slider>();
+            hotBar = GameObject.FindGameObjectWithTag("hotBar").GetComponent<HotbarManagement>();
+            inventory = GameObject.FindGameObjectWithTag("inventory").GetComponent<InventoryManagement>();
+        }
     }
 
     public void LoadInventory()
@@ -185,20 +197,20 @@ public class GameManager : MonoBehaviour
 
         SaveGame();
 
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(9);
 
         Destroy(player.gameObject);
 
         playerSlider.value = 100;
         
-        SceneManager.LoadScene("test_dungeon_1F");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         if (SceneManager.GetActiveScene().isLoaded)
         {
             CheckForPlayerInstance();
 
 
-            for (int i = 0; i < inventory.inventorySlots.Length; i++)
+            /*for (int i = 0; i < inventory.inventorySlots.Length; i++)
             {
                 Transform slot = inventory.inventorySlots[i].transform;
 
@@ -208,7 +220,7 @@ public class GameManager : MonoBehaviour
                     GameObject child = slot.GetChild(0).gameObject;
                     Destroy(child);
                 }
-            }
+            }*/
         }
 
         waitForReset = false;
@@ -296,27 +308,49 @@ public class GameManager : MonoBehaviour
 
     void UpdateObjectStates()
     {
-        GameObject[] objectsInScene = GameObject.FindGameObjectsWithTag("normalChest");
+        GameObject[] chestObjects = GameObject.FindGameObjectsWithTag("normalChest");
+        GameObject[] doorObjects = GameObject.FindGameObjectsWithTag("door");
 
         PlayerData data = SaveOutput.LoadPlayer();
 
         objectStates = data.objectStates;
 
-        for (int i = 0; i < objectsInScene.Length; i++)
+        for (int i = 0; i < chestObjects.Length; i++)
         {
 
-            if (objectsInScene[i].GetComponent<Chest>().isOpen)
+            if (chestObjects[i].GetComponent<Chest>().isOpen)
             {
-                int objectInSceneID = objectsInScene[i].GetComponent<Chest>().chestID;
+                int objectInSceneID = chestObjects[i].GetComponent<Chest>().chestID;
                 
                 foreach (var obj in objectStates)
                 {
 
-                    if (objectInSceneID == obj.Key)
+                    if (chestObjects[i].name == obj.Key)
                     {
-                        objectsInScene[i].GetComponent<Chest>().isOpen = true;
-                        objectsInScene[i].GetComponent<Chest>().ChestIsOpened();
+                        chestObjects[i].GetComponent<Chest>().isOpen = true;
+                        chestObjects[i].GetComponent<Chest>().ChestIsOpened();
                     }
+
+                    //Debug.Log("Object name: " + obj.Key + " Object state: " + obj.Value);
+                    
+                }
+            }
+        }
+
+        for (int i = 0; i < doorObjects.Length; i++)
+        {
+            if (doorObjects[i].GetComponent<Door>().isOpen)
+            {
+                
+                foreach (var obj in objectStates)
+                {
+
+                    if (doorObjects[i].name == obj.Key)
+                    {
+                        doorObjects[i].GetComponent<Door>().isOpen = true;
+                    }
+
+                    //Debug.Log("Object name: " + obj.Key + " Object state: " + obj.Value);
                     
                 }
             }

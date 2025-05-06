@@ -24,6 +24,12 @@ public class LevelManager : MonoBehaviour
     GameObject[] pathPoints;
 
     [SerializeField]
+    float teleportTimeStairs;
+
+    [SerializeField]
+    float teleportTimeDirect;
+
+    [SerializeField]
     float pathSpeed;
 
     [SerializeField]
@@ -50,9 +56,11 @@ public class LevelManager : MonoBehaviour
 
       if(instance == LevelInstace.currentInstance)
       {
-          FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
+        Debug.Log("I made it here");
 
-          StartCoroutine(WaitToMove());
+        FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
+
+        StartCoroutine(WaitToMove());
       }
     }
 
@@ -79,7 +87,7 @@ public class LevelManager : MonoBehaviour
           moveToNextPoint = false;
           canFollowPath = true;
 
-          StartCoroutine(TimeToTeleport(2.5f));
+          StartCoroutine(TimeToTeleport(teleportTimeStairs));
         }
       }
       else if (transitionType[1])
@@ -91,7 +99,7 @@ public class LevelManager : MonoBehaviour
 
           rotPlayer.enabled = false;
 
-          StartCoroutine(TimeToTeleport(.5f));
+          StartCoroutine(TimeToTeleport(teleportTimeDirect));
         }
 
       }
@@ -139,7 +147,11 @@ public class LevelManager : MonoBehaviour
 
       playerPosition.transform.rotation = spawnPoint.transform.rotation;
 
+      Debug.Log("I made it here");
+
       yield return new WaitForSeconds(1f);
+
+      player = GameObject.FindGameObjectWithTag("Player");
 
       rotPlayer.enabled = true;
       rotPlayer.canMove = true;

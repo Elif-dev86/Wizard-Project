@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class HotbarManagement : MonoBehaviour
 {
+    private static bool subscribed = false;
+
     InventoryManagement inventoryManagement;
 
     ActivateAttack attackIsSelected;
@@ -39,7 +41,11 @@ public class HotbarManagement : MonoBehaviour
     {
         clickAction = actions.FindActionMap("Gameplay").FindAction("pointClick");
 
-        clickAction.performed += OnClickPerformed;
+        if (!subscribed)
+        {
+            clickAction.performed += OnClickPerformed;
+            subscribed = true;
+        }
 
         choices = new Button[hotBarSlots.Length];
     }
@@ -108,6 +114,12 @@ public class HotbarManagement : MonoBehaviour
 
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
+        if (pMovement == null || inventoryManagement == null)
+        {
+            Debug.LogWarning("Missing reference(s) in Hotbar script!");
+            return;
+        }
+
         if (canSelectTarget == true)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -177,11 +189,22 @@ public class HotbarManagement : MonoBehaviour
 
     public void OnEnable()
     {
+        actions.Enable();
         clickAction.Enable();
     }
 
     public void OnDisable()
     {
+        actions.Disable();
         clickAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        if (subscribed)
+        {
+            clickAction.performed -= OnClickPerformed;
+            subscribed = false;
+        }
     }
 }

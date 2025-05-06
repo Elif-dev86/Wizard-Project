@@ -28,7 +28,6 @@ public class Chest : MonoBehaviour
 
         chestType = new bool[] {isRandomItems, isSelectedItem};
 
-        ChestIsOpened();
     }
 
     public void OpenChest()
@@ -38,6 +37,7 @@ public class Chest : MonoBehaviour
             if (chestType[0])
             {
                 anim.SetTrigger("openChest");
+                chestCollider.enabled = false;
 
                 for (int i = 0; i < itemSlots.Length; i++)
                 {
@@ -58,6 +58,7 @@ public class Chest : MonoBehaviour
                 {
 
                     anim.SetTrigger("openChest");
+                    chestCollider.enabled = false;
                     
                     GameObject itemToGenerate = Instantiate(posibleItems[i]);
 

@@ -40,11 +40,14 @@ public class DoorManager : MonoBehaviour
 
     public List<int> code = new List<int>();
 
+    private GameManager manager;
+
     //public int CheckSwitchCount;
 
     void Start()
     {
         mechanismType = new bool[] {isOnlyLevers, isOnlySwitches, isBoth, isPillarOnly, isCode};
+        manager = GameObject.FindObjectOfType<GameManager>();
     }
 
     void LateUpdate()
@@ -107,6 +110,11 @@ public class DoorManager : MonoBehaviour
             return;
         }
 
+    }
+
+    void AddObjectStateToManager()
+    {
+        manager.objectStates.Add(this.name, this.gameObject.GetComponent<Door>().isOpen = true);
     }
 
     bool IsCodeCorrect()

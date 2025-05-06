@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EssentialsLoader : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class EssentialsLoader : MonoBehaviour
 
     void Awake()
     {
+        
+
         if (GameManager.instance == null)
         {
             Instantiate(gameMan);
@@ -24,10 +27,7 @@ public class EssentialsLoader : MonoBehaviour
         {
             Instantiate(Player);
         }
-    }
 
-    void Update()
-    {
-        
+
     }
 }

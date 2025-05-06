@@ -34,6 +34,9 @@ TagManager:
   - bossHealth
   - pauseMenu
   - playerSpawn
+  - playerUI
+  - inventory
+  - hotBar
   layers:
   - Default
   - TransparentFX

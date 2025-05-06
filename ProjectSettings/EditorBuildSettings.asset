@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: f92111b200bf1de4d9049976331aebb1
   - enabled: 1
-    path: Assets/Scenes/test_game.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/test_dungeon_1F.unity
+    guid: 2a472757e0cae4b48a7fae97576f20b7
+  - enabled: 1
+    path: Assets/Scenes/test_dungeon_2F.unity
+    guid: 4878b4625b77e134aa847c172697af4a
   - enabled: 1
     path: Assets/Scenes/test_scene.unity
     guid: ace3e49c4d5119248938ec5ac2538815

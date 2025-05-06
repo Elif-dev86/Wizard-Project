@@ -42,10 +42,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "clickToMove",
+                    "name": "click",
                     "type": "Button",
                     "id": "d73b5ab2-c6a1-487f-b47c-22355fe6771e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -54,7 +54,7 @@
                     "name": "pause",
                     "type": "Button",
                     "id": "0da81df8-588c-44ab-843a-f942ec0ad837",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -252,10 +252,10 @@
                     "name": "",
                     "id": "dee8d662-cd72-4000-858b-60497764bb0c",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "clickToMove",
+                    "action": "click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -3237,7 +3237,7 @@ GameObject:
   - component: {fileID: 1557454386926542816}
   m_Layer: 5
   m_Name: Player UI
-  m_TagString: Untagged
+  m_TagString: playerUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5168,7 +5168,7 @@ GameObject:
   - component: {fileID: 5486344426651511243}
   m_Layer: 5
   m_Name: Hotbar
-  m_TagString: HotbarSlot
+  m_TagString: hotBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7465,7 +7465,7 @@ GameObject:
   - component: {fileID: 6382514111182574350}
   m_Layer: 5
   m_Name: Inventory
-  m_TagString: InventorySlot
+  m_TagString: inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7511,7 +7511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e02125a1318f94b8a344193508cf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotbarManagement: {fileID: 7142987388064193970}
+  hotbarManagement: {fileID: 0}
   inventoryObjects: {fileID: 11400000, guid: 03b816d4be82dc34c909b979be74af5c, type: 2}
   inventorySlots:
   - {fileID: 2611638984741695184}
@@ -7549,19 +7549,25 @@ MonoBehaviour:
   - {fileID: 7701172000031018862}
   - {fileID: 4095439678468270121}
   - {fileID: 5909822524948929672}
+  - {fileID: 6300977757524109055}
+  - {fileID: 3033416731558825061}
+  - {fileID: 2119832932426039967}
+  - {fileID: 1294674466812786286}
+  - {fileID: 2180509747131553192}
   - {fileID: 5239840658474727235}
   - {fileID: 3652117305231190955}
+  - {fileID: 7116425420344154042}
   - {fileID: 662317717649978134}
   - {fileID: 6348714942980212044}
   - {fileID: 928193690669935076}
   - {fileID: 3589781907000678600}
   - {fileID: 6821747213726955387}
-  - {fileID: 7116425420344154042}
   canSelectTarget: 0
   objectSelected: 
   objectCollectDistance: 13
   canStack: 0
   canTalk: 0
+  canCheck: 0
 --- !u!114 &2713486299285747169
 MonoBehaviour:
   m_ObjectHideFlags: 0

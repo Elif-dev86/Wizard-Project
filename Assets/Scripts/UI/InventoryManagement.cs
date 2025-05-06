@@ -4,6 +4,7 @@ using ExitGames.Client.Photon.StructWrapping;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventoryManagement : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class InventoryManagement : MonoBehaviour
 
     public bool canTalk = false;
 
+    public bool canCheck = false;
+
     private int[] avalibeSlots;
 
     private void Awake()
@@ -38,8 +41,7 @@ public class InventoryManagement : MonoBehaviour
 
     private void Start()
     {
-        manager = GameObject.FindObjectOfType<GameManager>();
-        avalibeSlots = new int[inventorySlots.Length];
+        StartCoroutine(InitializeInventory());
     }
 
     private void Update()
@@ -61,10 +63,12 @@ public class InventoryManagement : MonoBehaviour
         {
             if (inventorySlots[i].transform.childCount > 0)
             {
+                if (avalibeSlots == null) continue;
                 avalibeSlots[i] = 1;
             }
             else
             {
+                if (avalibeSlots == null) continue;
                 avalibeSlots[i] = 0;
             }
         }
@@ -133,8 +137,8 @@ public class InventoryManagement : MonoBehaviour
                         chest.GetComponent<Chest>().isOpen = true;
                     }
 
-                    manager.objectStates.Add(chestID, chest.GetComponent<Chest>().isOpen = true);
-                    SaveOutput.SavePlayer(manager);
+                    manager.objectStates.Add(chest.name, chest.GetComponent<Chest>().isOpen = true);
+                    //SaveOutput.SavePlayer(manager);
                 }
             }
         }
@@ -159,11 +163,15 @@ public class InventoryManagement : MonoBehaviour
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
+            if (inventorySlots[i] == null) continue;
+            if (!inventorySlots[i]) continue; // catches destroyed GameObjects
+
             Transform slot = inventorySlots[i].transform;
 
             if (slot.childCount > 0)
             {
                 GameObject child = slot.GetChild(0).gameObject;
+                if (child == null) continue;
 
                 if (objectSelected == "potion" && child.CompareTag("potion"))
                 {
@@ -207,8 +215,6 @@ public class InventoryManagement : MonoBehaviour
                 {
                     DoorManager doorManager = hit.collider.GetComponent<DoorManager>();
 
-                    Debug.Log(doorManager);
-
                     if (doorManager.isKeyOnly == true)
                     {
                         hit.collider.GetComponent<BoxCollider>().enabled = false;
@@ -221,6 +227,9 @@ public class InventoryManagement : MonoBehaviour
                         {
                             keyStack--;
                             textMeshPro.text = keyStack.ToString();
+
+                            manager.objectStates.Add(doorManager.gameObject.name, doorManager.gameObject.GetComponent<Door>().isOpen = true);
+                            //SaveOutput.SavePlayer(manager);
                         }
                         else
                         {
@@ -399,5 +408,66 @@ public class InventoryManagement : MonoBehaviour
                 newItem.transform.localPosition = Vector3.zero;
             }
         }
+    }
+
+    void CleanUpInventory()
+    {
+
+        List<GameObject> newSlots = new List<GameObject>();
+
+        hotbarManagement.hotBarSlots = new GameObject[0];
+        inventorySlots = new GameObject[0];
+
+        inventorySlots = GameObject.FindGameObjectsWithTag("inventorySlot");
+        hotbarManagement.hotBarSlots = GameObject.FindGameObjectsWithTag("hotBarSlot");
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            newSlots.Add(inventorySlots[i]);
+        }
+
+        for (int i = 0; i < hotbarManagement.hotBarSlots.Length; i++)
+        {
+            newSlots.Add(hotbarManagement.hotBarSlots[i]);
+        }
+
+        inventorySlots = newSlots.ToArray();
+        newSlots.Clear();
+
+        avalibeSlots = new int[inventorySlots.Length];
+        
+    }
+
+    private IEnumerator InitializeInventory()
+    {
+        // Wait 1 frame so Unity finishes instantiating and setting up the UI hierarchy
+        yield return null;
+
+        if (instance == null)
+        {
+            instance = FindObjectOfType<InventoryManagement>();
+        }
+
+        hotbarManagement = FindObjectOfType<HotbarManagement>();
+        manager = FindObjectOfType<GameManager>();
+
+        CleanUpInventory(); // now it's safe
+
+        avalibeSlots = new int[inventorySlots.Length];
+    }
+
+    IEnumerator WaitToCleanInventory()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        CleanUpInventory();
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
     }
 }

@@ -13,7 +13,7 @@ public class PlayerData
     public int[] itemStackIndex;
     public float[] position;
 
-    public Dictionary<int, bool> objectStates = new Dictionary<int, bool>();
+    public Dictionary<string, bool> objectStates = new Dictionary<string, bool>();
 
     public PlayerData (GameManager manager)
     {
