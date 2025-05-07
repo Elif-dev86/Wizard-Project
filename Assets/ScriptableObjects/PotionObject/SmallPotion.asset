@@ -15,4 +15,4 @@ MonoBehaviour:
   potionID: small_potion
   potionName: SmallPotion
   potionType: healing
-  effectAmount: 10
+  effectAmount: 20

@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private Animator gameOverScreenAnim;
 
+    AsyncOperation asyncLoad;
+
     [SerializeField]
     public Dictionary<string, bool> objectStates = new Dictionary<string, bool>();
 
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("test_dungeon_2F");
         }
 
+        StartCoroutine(PreLoadGame());
+
         //LoadInventory();
     }
 
@@ -96,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("test_dungeon_1F");
+        asyncLoad.allowSceneActivation = true;
 
         if (SceneManager.GetActiveScene().isLoaded)
         {
@@ -175,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ReloadInventory()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
@@ -183,7 +187,7 @@ public class GameManager : MonoBehaviour
         {
             CheckForPlayerInstance();
             LoadInventory();
-            Debug.Log("Is Loaded");
+            //Debug.Log("Is Loaded");
         }
 
         
@@ -208,19 +212,6 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().isLoaded)
         {
             CheckForPlayerInstance();
-
-
-            /*for (int i = 0; i < inventory.inventorySlots.Length; i++)
-            {
-                Transform slot = inventory.inventorySlots[i].transform;
-
-
-                if(slot.childCount > 0)
-                {
-                    GameObject child = slot.GetChild(0).gameObject;
-                    Destroy(child);
-                }
-            }*/
         }
 
         waitForReset = false;
@@ -355,6 +346,27 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator PreLoadGame()
+    {
+        asyncLoad = SceneManager.LoadSceneAsync("test_dungeon_1F");
+        asyncLoad.allowSceneActivation = false;
+        
+        while(!asyncLoad.isDone)
+        {
+            //Debug.Log($"Loading Progress: {asyncLoad.progress}");
+
+            // Scene is fully loaded (but not activated) when progress is 0.9
+            if (asyncLoad.progress >= 0.9f)
+            {
+                //Debug.Log("Scene preloaded (ready for activation).");
+                break;
+            }
+
+            yield return null;
+        }
+
     }
     
     public void QuitGamePause()

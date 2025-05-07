@@ -15,4 +15,4 @@ MonoBehaviour:
   potionID: medium_potion
   potionName: MediumPotion
   potionType: Healing
-  effectAmount: 25
+  effectAmount: 35

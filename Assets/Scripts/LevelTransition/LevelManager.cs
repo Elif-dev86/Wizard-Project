@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
 
       if(instance == LevelInstace.currentInstance)
       {
-        Debug.Log("I made it here");
+        //Debug.Log("I made it here");
 
         FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
 
@@ -135,10 +135,10 @@ public class LevelManager : MonoBehaviour
    private IEnumerator TimeToTeleport(float levelLoadDelay)
    {
 
-    yield return new WaitForSeconds(levelLoadDelay);
+      yield return new WaitForSeconds(levelLoadDelay);
 
-    LevelInstace.currentInstance = instance;
-    SceneManager.LoadScene(targetSceneName);
+      LevelInstace.currentInstance = instance;
+      SceneManager.LoadScene(targetSceneName);
    }
 
    private IEnumerator WaitToMove()
@@ -147,7 +147,7 @@ public class LevelManager : MonoBehaviour
 
       playerPosition.transform.rotation = spawnPoint.transform.rotation;
 
-      Debug.Log("I made it here");
+      //Debug.Log("I made it here");
 
       yield return new WaitForSeconds(1f);
 

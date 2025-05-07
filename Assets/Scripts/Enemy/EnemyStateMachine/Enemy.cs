@@ -170,7 +170,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
             {
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
 
-                Debug.Log(Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask));
+                //Debug.Log(Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask));
 
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
@@ -182,7 +182,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
             }
             else
             {
-                Debug.Log("Is there but I can't see it");
+                //Debug.Log("Is there but I can't see it");
                 ChangeState(EnemyState.Idle);
             }
         }
@@ -263,9 +263,9 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
 
     protected virtual void OnTriggerEnter(Collider other) 
     {
-        Debug.Log($"Triggered with: {other.name}");
+        //Debug.Log($"Triggered with: {other.name}");
         SpellHolder spellHolder = other.gameObject.GetComponent<SpellHolder>();
-        Debug.Log($"SpellHolder component: {spellHolder}");
+        //Debug.Log($"SpellHolder component: {spellHolder}");
 
         if (spellHolder != null)
         {
@@ -276,7 +276,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyDamageable
     public void TakeDamage(Spell spell)
     {
         enemyHealthCanvas.value -= spell.spellDamage;
-        Debug.Log("Enemy damaged by " + spell.spellName + " for " + spell.spellDamage + " damage.");
+        //Debug.Log("Enemy damaged by " + spell.spellName + " for " + spell.spellDamage + " damage.");
 
         visibleTargets.Add(FindObjectOfType<PlayerMovement>().transform);
 

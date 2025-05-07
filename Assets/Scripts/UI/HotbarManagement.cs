@@ -155,6 +155,7 @@ public class HotbarManagement : MonoBehaviour
                 {
                     GameObject child = slot.GetChild(0).gameObject;
                     
+                    if (!child.GetComponent<ActivateAttack>()) continue;
                     child.GetComponent<ActivateAttack>().isSelected = false;
                 }
             }
@@ -171,6 +172,8 @@ public class HotbarManagement : MonoBehaviour
             if (slot.childCount > 0 )
             {
                 GameObject child = slot.GetChild(0).gameObject;
+
+                if (child.CompareTag("potion")) continue;
 
                 ActivateAttack activateAttack = child.GetComponent<ActivateAttack>();
 
